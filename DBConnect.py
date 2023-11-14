@@ -1,15 +1,33 @@
-import pyodbc
+import mysql.connector
 
-# Configura las credenciales de la base de datos
-server_name = "kokua-srv.mysql.database.azure.com"
-database_name = "kokua"
-username = "kokuamaster"
+# Datos de conexión
+host = "kokua-srv.mysql.database.azure.com"
+user = "kokuamaster"
 password = "ingSoftwareUP2023"
+database = "KOKUA"
 
-# Crea una conexión a la base de datos
-connection = pyodbc.connect(
-    f"DRIVER={'ODBC Driver 18 for SQL Server'};SERVER={server_name};DATABASE={database_name};UID={username};PWD={password}"
-)
+def DBConnection():
+    # Intenta establecer la conexión
+    try:
+        connection = mysql.connector.connect(
+            host=host,
+            user=user,
+            password=password,
+            database=database
+        )
+        if connection.is_connected():
+            print("Conexión establecida")
+            return connection    
 
-# Imprime el nombre de la base de datos
-print(connection.database)
+    except mysql.connector.Error as err:
+        print("Error de conexión: {}".format(err))
+        return None  
+
+
+
+    # finally:
+    #     # Cerrar la conexión al finalizar
+    #     if 'connection' in locals() and connection.is_connected():
+    #         cursor.close()
+    #         connection.close()
+    #         print("Conexión cerrada")
