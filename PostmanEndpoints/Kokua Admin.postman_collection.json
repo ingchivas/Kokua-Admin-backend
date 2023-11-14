@@ -298,7 +298,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://localhost:8081"
+			"value": "https://kokuaadminbackend.eviniegra.software"
 		}
 	]
 }
