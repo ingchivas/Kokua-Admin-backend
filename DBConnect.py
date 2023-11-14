@@ -24,10 +24,3 @@ def DBConnection():
         return None  
 
 
-
-    # finally:
-    #     # Cerrar la conexión al finalizar
-    #     if 'connection' in locals() and connection.is_connected():
-    #         cursor.close()
-    #         connection.close()
-    #         print("Conexión cerrada")

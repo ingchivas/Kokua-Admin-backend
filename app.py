@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from backend.AseguradorasYPolizas import *
+from backend.Facturas import *
 
 app = FastAPI()
 
@@ -105,6 +106,47 @@ async def getPolizasPorAseguradora(id: int):
 @app.get("/polizas/PolizasPorTipo/{tipo}")
 async def getPolizasPorTipo(tipo: str):
     return ConsultarPolizasPorTipo(tipo)
+
+#______________________________________________________Facturas_________________________________________________________________
+
+@app.get("/facturas/Todas")
+async def getFacturas():
+    return ConsultarFacturas()
+
+@app.get("/facturas/Factura/{id}")
+async def getFactura(id: int):
+    return ConsultarFacturaPorID(id)
+
+@app.get("/facturas/CitaAsociada/{id}")
+async def getCitaAsociada(id: int):
+    return ConsultarCitaAsociada(id)
+
+@app.post("/facturas/RegistrarFactura")
+async def postFactura(factura: dict):
+    try:
+        IDCita = factura["IDCita"]
+        Costo = factura["Costo"]
+        return InsertarFactura(IDCita, Costo)
+    except:
+        return {"status": 400, "message": "Error al registrar la factura"}
+
+@app.put("/facturas/ActualizarFactura")
+async def putFactura(factura: dict):
+    try:
+        IDFactura = factura["IDFactura"]
+        NuevoCosto = factura["NuevoCosto"]
+        return ActualizarFactura(IDFactura, NuevoCosto)
+    except:
+        return {"status": 400, "message": "Error al actualizar la factura"}
+
+@app.delete("/facturas/EliminarFactura/{id}")
+async def deleteFactura(id: int):
+    return EliminarFactura(id)
+
+@app.get("/facturas/FacturasOrdenadasPorCosto")
+async def getFacturasOrdenadasPorCosto():
+    return ConsultarFacturasOrdenadasPorCosto()
+
 
 
 if __name__ == "__main__":

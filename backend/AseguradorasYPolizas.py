@@ -31,11 +31,11 @@ def RegistrarAseguradora(NombreAseguradora, Direccion, NumContacto):
         cursor.execute("INSERT INTO Aseguradoras (IDAseguradora, NombreAseguradora, Direccion, NumContacto) VALUES (%s, %s, %s, %s)",
                        (IDAseguradora, NombreAseguradora, Direccion, NumContacto))
         connection.commit()
-        return True
+        return {"status": 200, "message": "Aseguradora registrada"}
     
     except mysql.connector.Error as err:
         print("Error de conexión: {}".format(err))
-        return False
+        return 
     
     finally:
         if 'connection' in locals() and connection.is_connected():
@@ -60,15 +60,15 @@ def ConsultarAseguradoras():
         
         if len(result) > 0:
             # Convertir el resultado a un diccionario
-            aseguradoras = {'result': []}
+            aseguradoras = []
             for i in result:
-                aseguradoras['result'].append({
+                aseguradoras.append({
                     'IDAseguradora': i[0],
                     'NombreAseguradora': i[1],
                     'Direccion': i[2],
                     'NumContacto': i[3]
                 })
-            return aseguradoras
+            return {"status": 200, "result": aseguradoras }
         else:
             return None
     
@@ -102,15 +102,15 @@ def ConsultarAseguradora(IDAseguradora):
         
         if len(result) > 0:
             # Convertir el resultado a un diccionario
-            aseguradora = {'result': []}
+            aseguradora = []
             for i in result:
-                aseguradora['result'].append({
+                aseguradora.append({
                     'IDAseguradora': i[0],
                     'NombreAseguradora': i[1],
                     'Direccion': i[2],
                     'NumContacto': i[3]
                 })
-            return aseguradora
+            return {"status": 200, "result": aseguradora}
         else:
             return None
     
@@ -144,15 +144,15 @@ def ConsultarAseguradorasPolizas(IDAseguradora):
         
         if len(result) > 0:
             # Convertir el resultado a un diccionario
-            aseguradoras = {'result': []}
+            aseguradoras = []
             for i in result:
-                aseguradoras['result'].append({
+                aseguradoras.append({
                     'IDAseguradora': i[0],
                     'NombreAseguradora': i[1],
                     'Direccion': i[2],
                     'NumContacto': i[3]
                 })
-            return aseguradoras
+            return {"status": 200, "result": aseguradoras }
         else:
             return None
     
@@ -183,7 +183,7 @@ def EliminarAseguradora(IDAseguradora):
     try:
         cursor.execute("DELETE FROM Aseguradoras WHERE IDAseguradora = %s", (IDAseguradora,))
         connection.commit()
-        return True
+        return {"status": 200, "message": "Aseguradora eliminada"}
     
     except mysql.connector.Error as err:
         print("Error de conexión: {}".format(err))
@@ -215,7 +215,7 @@ def ActualizarAseguradora(IDAseguradora, NombreAseguradora, Direccion, NumContac
     try:
         cursor.execute("UPDATE Aseguradoras SET NombreAseguradora = %s, Direccion = %s, NumContacto = %s WHERE IDAseguradora = %s", (NombreAseguradora, Direccion, NumContacto, IDAseguradora))
         connection.commit()
-        return True
+        return {"status": 200, "message": "Aseguradora actualizada"}
     
     except mysql.connector.Error as err:
         print("Error de conexión: {}".format(err))
@@ -253,7 +253,7 @@ def RegistrarPoliza(IDAseguradora, Vigencia_de_Poliza, TipoDePoliza, SumaAsegura
         try:
             cursor.execute("INSERT INTO Polizas (IDAseguradora, Vigencia_de_Poliza, TipoDePoliza, SumaAsegurada, FechaInicio, Prima) VALUES (%s, %s, %s, %s, %s, %s)", (IDAseguradora, Vigencia_de_Poliza, TipoDePoliza, SumaAsegurada, FechaInicio, Prima))
             connection.commit()
-            return True
+            return {"status": 200, "message": "Poliza registrada"}
         
         except mysql.connector.Error as err:
             print("Error de conexión: {}".format(err))
@@ -285,9 +285,9 @@ def ConsultarPoliza(IDPoliza):
         
         if len(result) > 0:
             # Convertir el resultado a un diccionario
-            poliza = {'result': []}
+            poliza = []
             for i in result:
-                poliza['result'].append({
+                poliza.append({
                     'IDPoliza': i[0],
                     'IDAseguradora': i[1],
                     'Vigencia_de_Poliza': i[2],
@@ -296,7 +296,7 @@ def ConsultarPoliza(IDPoliza):
                     'FechaInicio': i[5],
                     'Prima': i[6]
                 })
-            return poliza
+            return {"status": 200, "result": poliza}
         else:
             return None
     
@@ -327,9 +327,9 @@ def ConsultarPolizas():
         
         if len(result) > 0:
             # Convertir el resultado a un diccionario
-            polizas = {'result': []}
+            polizas = []
             for i in result:
-                polizas['result'].append({
+                polizas.append({
                     'IDPoliza': i[0],
                     'IDAseguradora': i[1],
                     'Vigencia_de_Poliza': i[2],
@@ -338,7 +338,7 @@ def ConsultarPolizas():
                     'FechaInicio': i[5],
                     'Prima': i[6]
                 })
-            return polizas
+            return {"status": 200, "result": polizas}
         else:
             return None
     
@@ -372,9 +372,9 @@ def ConsultarPolizasAseguradora(IDAseguradora):
         
         if len(result) > 0:
             # Convertir el resultado a un diccionario
-            polizas = {'result': []}
+            polizas = []
             for i in result:
-                polizas['result'].append({
+                polizas.append({
                     'IDPoliza': i[0],
                     'IDAseguradora': i[1],
                     'Vigencia_de_Poliza': i[2],
@@ -383,7 +383,7 @@ def ConsultarPolizasAseguradora(IDAseguradora):
                     'FechaInicio': i[5],
                     'Prima': i[6]
                 })
-            return polizas
+            return {"status": 200, "result": polizas}
         else:
             return None
     
@@ -417,9 +417,9 @@ def ConsultarPolizasPorTipo(TipoDePoliza):
         
         if len(result) > 0:
             # Convertir el resultado a un diccionario
-            polizas = {'result': []}
+            polizas = []
             for i in result:
-                polizas['result'].append({
+                polizas.append({
                     'IDPoliza': i[0],
                     'IDAseguradora': i[1],
                     'Vigencia_de_Poliza': i[2],
@@ -428,7 +428,7 @@ def ConsultarPolizasPorTipo(TipoDePoliza):
                     'FechaInicio': i[5],
                     'Prima': i[6]
                 })
-            return polizas
+            return {"status": 200, "result": polizas}
         else:
             return None
     
@@ -465,7 +465,7 @@ def ActualizarPoliza(IDPoliza, IDAseguradora, Vigencia_de_Poliza, TipoDePoliza, 
     try:
         cursor.execute("UPDATE Polizas SET IDAseguradora = %s, Vigencia_de_Poliza = %s, TipoDePoliza = %s, SumaAsegurada = %s, FechaInicio = %s, Prima = %s WHERE IDPoliza = %s", (IDAseguradora, Vigencia_de_Poliza, TipoDePoliza, SumaAsegurada, FechaInicio, Prima, IDPoliza))
         connection.commit()
-        return True
+        return {"status": 200, "message": "Poliza actualizada"}
     
     except mysql.connector.Error as err:
         print("Error de conexión: {}".format(err))
@@ -494,7 +494,7 @@ def EliminarPoliza(IDPoliza):
     try:
         cursor.execute("DELETE FROM Polizas WHERE IDPoliza = %s", (IDPoliza,))
         connection.commit()
-        return True
+        return {"status": 200, "message": "Poliza eliminada"}
     
     except mysql.connector.Error as err:
         print("Error de conexión: {}".format(err))
