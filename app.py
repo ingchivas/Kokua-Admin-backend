@@ -2,11 +2,13 @@ import datetime
 import json
 import uvicorn
 from fastapi import FastAPI
+from fastapi import HTTPException
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from backend.AseguradorasYPolizas import *
 from backend.Facturas import *
 from backend.Ordenes import *
+from backend.Usuarios import *
 
 app = FastAPI()
 
@@ -226,6 +228,129 @@ async def postOrden(orden: dict):
 @app.delete("/ordenes/EliminarOrden/{IDOrden}")
 async def deleteOrden(IDOrden: int):
     return EliminarOrden(IDOrden)
+
+
+#______________________________________________________Usuarios_________________________________________________________________
+
+@app.get("/usuarios/Todos")
+async def getUsuarios():
+    return ConsultarUsuarios()
+
+@app.get("/usuarios/Usuario/{id}")
+async def getUsuario(id: int):
+    return ConsultarUsuario(id)
+
+@app.post("/usuarios/Login")
+async def login(usuario: dict):
+    try:
+        username = usuario["username"]
+        password = usuario["password"]
+        return Login(username, password)
+    except:
+        return {"status": 400, "message": "Error al iniciar sesión"}
+
+@app.post("/usuarios/CrearUsuarioPorTipo")
+async def postUsuario(usuario: dict):
+
+    try:
+        tipo_acceso = usuario["tipo_acceso"]
+        username = usuario["username"]
+        password = usuario["password"]
+        return CrearUsuarioPorTipo(username, password, tipo_acceso)
+    except:
+        pass
+
+    try:
+        username = usuario["username"]
+        password = usuario["password"]
+        return CrearUsuarioPorTipo(username, password)
+    except:
+        return {"status": 400, "message": "Error al crear el usuario"}
+
+@app.post("/usuarios/CrearUsuarioPaciente")
+async def postUsuarioPaciente(usuario: dict):
+    try:
+        username = usuario["username"]
+        password = usuario["password"]
+        nombre = usuario["nombre"]
+        apellido = usuario["apellido"]
+        padecimiento = usuario["padecimiento"]
+        estatus_paciente = usuario["estatus_paciente"]
+        saldo_actual = usuario["saldo_actual"]
+        return CrearUsuarioPaciente(username, password, nombre, apellido, padecimiento, estatus_paciente, saldo_actual)
+
+    except:
+        return HTTPException(status_code=400, detail="Error al crear el usuario")
+
+@app.post("/usuarios/CrearUsuarioPacienteExistente")
+async def postUsuarioPacienteExistente(usuario: dict):
+    try:
+        IDPaciente = usuario["IDPaciente"]
+        username = usuario["username"]
+        password = usuario["password"]
+        return CrearUsuarioPacienteExistente(IDPaciente, username, password)
+    except:
+        return HTTPException(status_code=400, detail="Error al crear el usuario")
+    
+@app.post("/usuarios/CrearUsuarioDoctor")
+async def postUsuarioDoctor(usuario: dict):
+    try:
+        username = usuario["username"]
+        password = usuario["password"]
+        cedula_profesional = usuario["cedula_profesional"]
+        nombre = usuario["nombre"]
+        apellido = usuario["apellido"]
+        fecha_nacimiento = usuario["fecha_nacimiento"]
+        costo_cita = usuario["costo_cita"]
+        especialidad = usuario["especialidad"]
+        return CrearUsuarioDoctor(username, password, cedula_profesional, nombre, apellido, fecha_nacimiento, costo_cita, especialidad)
+    except:
+        return HTTPException(status_code=400, detail="Error al crear el usuario")
+
+@app.post("/usuarios/CrearUsuarioDoctorExistente")
+async def postUsuarioDoctorExistente(usuario: dict):
+    try:
+        IDDoctor = usuario["IDDoctor"]
+        username = usuario["username"]
+        password = usuario["password"]
+        return CrearUsuarioDoctorExistente(IDDoctor, username, password)
+    except:
+        return HTTPException(status_code=400, detail="Error al crear el usuario")
+    
+@app.post("/usuarios/CrearUsuarioProovedor")
+async def postUsuarioProovedor(usuario: dict):
+    try:
+        username = usuario["username"]
+        password = usuario["password"]
+        nombre = usuario["nombre"]
+        ubicacion = usuario["ubicacion"]
+        num_contacto = usuario["num_contacto"]
+        return CrearUsuarioProveedor(username, password, nombre, ubicacion, num_contacto)
+    except:
+        return HTTPException(status_code=400, detail="Error al crear el usuario")
+    
+@app.post("/usuarios/CrearUsuarioProovedorExistente")
+async def postUsuarioProovedorExistente(usuario: dict):
+    try:
+        IDProveedor = usuario["IDProveedor"]
+        username = usuario["username"]
+        password = usuario["password"]
+        return CrearUsuarioProveedorExistente(IDProveedor, username, password)
+    except:
+        return HTTPException(status_code=400, detail="Error al crear el usuario")
+    
+@app.post("/usuarios/CrearUsuarioAdministrador")
+async def postUsuarioAdministrador(usuario: dict):
+    try:
+        username = usuario["username"]
+        password = usuario["password"]
+        return CrearUsuarioAdministrador(username, password)
+    except:
+        return HTTPException(status_code=400, detail="Error al crear el usuario")
+    
+@app.delete("/usuarios/EliminarUsuario/{id}")
+async def deleteUsuario(id: int):
+    return EliminarUsuario(id)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8081)

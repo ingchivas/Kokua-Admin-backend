@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9f9e9b4a-5968-4e33-8c14-3f2b11523793",
+		"_postman_id": "959d6e13-db78-489b-afe1-cdfada4f5ffb",
 		"name": "Kokua Admin",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "22122408"
@@ -491,14 +491,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/ordenes/OrdenesPorMedicina/01",
+							"raw": "{{host}}/ordenes/OrdenesPorMedicina/07",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"ordenes",
 								"OrdenesPorMedicina",
-								"01"
+								"07"
 							]
 						}
 					},
@@ -510,14 +510,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/ordenes/OrdenesPorProveedor/01",
+							"raw": "{{host}}/ordenes/OrdenesPorProveedor/08",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"ordenes",
 								"OrdenesPorProveedor",
-								"01"
+								"08"
 							]
 						}
 					},
@@ -584,14 +584,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/ordenes/OrdenesPorEntregaEsperada/12-01-2023",
+							"raw": "{{host}}/ordenes/OrdenesPorEntregaEsperada/2023-05-14",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"ordenes",
 								"OrdenesPorEntregaEsperada",
-								"12-01-2023"
+								"2023-05-14"
 							]
 						}
 					},
@@ -603,14 +603,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/ordenes/OrdenesPorFechaOrden/12-01-2023",
+							"raw": "{{host}}/ordenes/OrdenesPorFechaOrden/2023-05-14",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"ordenes",
 								"OrdenesPorFechaOrden",
-								"12-01-2023"
+								"2023-05-14"
 							]
 						}
 					},
@@ -622,14 +622,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/ordenes/OrdenesPorFechaEntrega/12-01-2023",
+							"raw": "{{host}}/ordenes/OrdenesPorFechaEntrega/2023-05-14",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"ordenes",
 								"OrdenesPorFechaEntrega",
-								"12-01-2023"
+								"2023-05-14"
 							]
 						}
 					},
@@ -710,6 +710,310 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Todos Los Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/usuarios/Todos",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"Todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Usuario por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/usuarios/Usuario/01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"Usuario",
+								"01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"EstebanVini\", \"password\": \"@1234@hola\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/Login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario Por Tipo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"tipo_acceso\": 3, \"username\": \"NuevoUsuario\", \"password\": \"123456\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/CrearUsuarioPorTipo",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"CrearUsuarioPorTipo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario Paciente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"EstebanVini\",\r\n     \"password\": \"@1234@hola\", \r\n     \"nombre\": \"Esteban\", \r\n     \"apellido\": \"Viniegra\", \r\n     \"padecimiento\": \"Cancer Estomacal\", \r\n     \"estatus_paciente\": 3, \r\n     \"saldo_actual\": \"23000.02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/CrearUsuarioPaciente",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"CrearUsuarioPaciente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario Paciente Existente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"IDPaciente\": \"\", \"username\": \"\", \"password\": \"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/CrearUsuarioPacienteExistente",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"CrearUsuarioPacienteExistente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario Doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"\", \"password\": \"\", \"cedula_profesional\": \"\", \"nombre\": \"\", \"apellido\": \"\", \"fecha_nacimiento\": \"\", \"costo_cita\": \"\", \"especialidad\": \"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/CrearUsuarioDoctor",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"CrearUsuarioDoctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario Doctor Existente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"IDDoctor\": \"\", \"username\": \"\", \"password\": \"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/CrearUsuarioDoctorExistente",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"CrearUsuarioDoctorExistente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario Proveedor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"JuanUser\", \"password\": \"\", \"nombre\": \"JuanUser\", \"ubicacion\": \"\", \"num_contacto\": \"\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/CrearUsuarioProovedor",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"CrearUsuarioProovedor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario Proveedor Existente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"IDProveedor\": \"13\", \"username\": \"JuanUser\", \"password\": \"PasswordSeguro\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/CrearUsuarioProovedorExistente",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"CrearUsuarioProovedorExistente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Usuario Administrador",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"Admin\", \"password\": \"ingSoftwareUP2023\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/usuarios/CrearUsuarioAdministrador",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"CrearUsuarioAdministrador"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/usuarios/EliminarUsuario/{id}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"usuarios",
+								"EliminarUsuario",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -735,7 +1039,8 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "https://kokuaadminbackend.eviniegra.software"
+			"value": "https://kokuaadminbackend.eviniegra.software",
+			"type": "string"
 		}
 	]
 }
