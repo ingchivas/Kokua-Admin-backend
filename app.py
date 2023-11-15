@@ -6,6 +6,7 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from backend.AseguradorasYPolizas import *
 from backend.Facturas import *
+from backend.Ordenes import *
 
 app = FastAPI()
 
@@ -147,7 +148,84 @@ async def deleteFactura(id: int):
 async def getFacturasOrdenadasPorCosto():
     return ConsultarFacturasOrdenadasPorCosto()
 
+#______________________________________________________Ordenes_________________________________________________________________
 
+@app.get("/ordenes/Todas")
+async def getOrdenes():
+    return ConsultarTodasLasOrdenes()
+
+@app.get("/ordenes/Orden/{id}")
+async def getOrden(id: int):
+    return ConsultarOrdenPorID(id)
+
+@app.get("/ordenes/OrdenesPorPaciente/{id_paciente}")
+async def getOrdenesPorPaciente(id_paciente: int):
+    return ConsultarOrdenesPorPaciente(id_paciente)
+
+@app.get("/ordenes/OrdenesPorMedicina/{id_medicina}")
+async def getOrdenesPorMedicina(id_medicina: int):
+    return ConsultarOrdenesPorMedicina(id_medicina)
+
+@app.get("/ordenes/OrdenesPorProveedor/{id_proveedor}")
+async def getOrdenesPorProveedor(id_proveedor: int):
+    return ConsultarOrdenesPorProveedor(id_proveedor)
+
+@app.get("/ordenes/OrdenesPorCosto")
+async def getOrdenesPorCosto(mayor_a_menor: bool = True):
+    return ConsultarOrdenesPorCosto(mayor_a_menor)
+
+@app.get("/ordenes/OrdenesPorEstatus/{estatus}")
+async def getOrdenesPorEstatus(estatus: str):
+    return ConsultarOrdenesPorEstatus(estatus)
+
+@app.get("/ordenes/OrdenesPorCantidad")
+async def getOrdenesPorCantidad(mayor_a_menor: bool = True):
+    return ConsultarOrdenesPorCantidad(mayor_a_menor)
+
+@app.get("/ordenes/OrdenesPorEntregaEsperada/{fecha_entrega}")
+async def getOrdenesPorEntregaEsperada(fecha_entrega: str):
+    return ConsultarOrdenesPorEntregaEsperada(fecha_entrega)
+
+@app.get("/ordenes/OrdenesPorFechaOrden/{fecha_orden}")
+async def getOrdenesPorFechaOrden(fecha_orden: str):
+    return ConsultarOrdenesPorFechaOrden(fecha_orden)
+
+@app.get("/ordenes/OrdenesPorFechaEntrega/{fecha_entrega}")
+async def getOrdenesPorFechaEntrega(fecha_entrega: str):
+    return ConsultarOrdenesPorFechaEntrega(fecha_entrega)
+
+@app.post("/ordenes/ActualizarOrden")
+async def putOrden(IDOrden: dict):
+    try:
+        IDOrden = IDOrden["IDOrden"]
+        IDMedicina = IDOrden["IDMedicina"]
+        IDProveedor = IDOrden["IDProveedor"]
+        Cantidad = IDOrden["Cantidad"]
+        Costo = IDOrden["Costo"]
+        FechaOrden = IDOrden["FechaOrden"]
+        FechaEntrega = IDOrden["FechaEntrega"]
+        Estatus = IDOrden["Estatus"]
+        return ActualizarOrden(IDOrden, IDMedicina, IDProveedor, Cantidad, Costo, FechaOrden, FechaEntrega, Estatus)
+    except:
+        return {"status": 400, "message": "Error al actualizar la orden"}
+    
+@app.post("/ordenes/RegistrarOrden")
+async def postOrden(orden: dict):
+    try:
+        IDMedicina = orden["IDMedicina"]
+        IDProveedor = orden["IDProveedor"]
+        Cantidad = orden["Cantidad"]
+        Costo = orden["Costo"]
+        FechaOrden = orden["FechaOrden"]
+        FechaEntrega = orden["FechaEntrega"]
+        Estatus = orden["Estatus"]
+        return InsertarOrden(IDMedicina, IDProveedor, Cantidad, Costo, FechaOrden, FechaEntrega, Estatus)
+    except:
+        return {"status": 400, "message": "Error al registrar la orden"}
+
+@app.delete("/ordenes/EliminarOrden/{IDOrden}")
+async def deleteOrden(IDOrden: int):
+    return EliminarOrden(IDOrden)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8081)

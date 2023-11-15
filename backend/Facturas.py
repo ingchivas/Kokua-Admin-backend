@@ -20,7 +20,11 @@ def ConsultarFacturas():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM Factura")
         result = cursor.fetchall()
-        return {"status": 200, "message": "Facturas consultadas", "facturas": result}
+
+        if result:
+            return {"status": 200, "result": result}
+        else:
+            return {"status": 404, "message": "Facturas no encontradas"}
     
     except mysql.connector.Error as err:
         print("Error al consultar las facturas: {}".format(err))
@@ -53,7 +57,7 @@ def ConsultarFacturaPorID(id_factura):
         result = cursor.fetchone()
 
         if result:
-            return {"status": 200, "message": "Factura consultada", "factura": result}
+            return {"status": 200, "result": result}
         else:
             return {"status": 404, "message": "Factura no encontrada"}
 
@@ -88,9 +92,9 @@ def ConsultarCitaAsociada(id_factura):
         result = cursor.fetchone()
 
         if result:
-            return {"status": 200, "message": "Cita consultada", "cita": result}
+            return {"status": 200, "result": result}
         else:
-            return {"status": 404, "message": "Cita no encontrada"}
+            return {"status": 404, "message": "Cita asociada no encontrada"}
 
     except mysql.connector.Error as err:
         print("Error al consultar la cita asociada: {}".format(err))
@@ -155,7 +159,7 @@ def ActualizarFactura(id_factura, nuevo_costo):
         cursor = connection.cursor()
         cursor.execute("UPDATE Factura SET Costo = %s WHERE idFactura = %s", (nuevo_costo, id_factura))
         connection.commit()
-        return {"status": 200, "message": "Factura actualizada correctamente"}
+        return {"status": 200, "result": "Factura actualizada correctamente"}
 
     except mysql.connector.Error as err:
         print("Error al actualizar la factura: {}".format(err))
@@ -187,7 +191,7 @@ def EliminarFactura(id_factura):
         cursor = connection.cursor()
         cursor.execute("DELETE FROM Factura WHERE idFactura = %s", (id_factura,))
         connection.commit()
-        return {"status": 200, "message": "Factura eliminada correctamente"}
+        return {"status": 200, "result": "Factura eliminada correctamente"}
 
     except mysql.connector.Error as err:
         print("Error al eliminar la factura: {}".format(err))
@@ -216,7 +220,10 @@ def ConsultarFacturasOrdenadasPorCosto():
         cursor = connection.cursor()
         cursor.execute("SELECT * FROM Factura ORDER BY Costo")
         result = cursor.fetchall()
-        return {"status": 200, "message": "Facturas consultadas y ordenadas por costo", "facturas": result}
+        if result:
+            return {"status": 200, "result": result}
+        else:
+            return {"status": 404, "message": "Facturas no encontradas"}
     
     except mysql.connector.Error as err:
         print("Error al consultar las facturas ordenadas por costo: {}".format(err))

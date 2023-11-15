@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3ac87882-173e-441d-ac6f-cc0980391a3f",
+		"_postman_id": "9f9e9b4a-5968-4e33-8c14-3f2b11523793",
 		"name": "Kokua Admin",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "22122408"
@@ -418,6 +418,291 @@
 							"path": [
 								"facturas",
 								"EliminarFactura",
+								"01"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Órdenes",
+			"item": [
+				{
+					"name": "Todas Las Órdenes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/Todas",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"Todas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Órden Por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/Orden/01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"Orden",
+								"01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Órdenes Por Paciente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/OrdenesPorPaciente/01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"OrdenesPorPaciente",
+								"01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Órdenes Por Medicina",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/OrdenesPorMedicina/01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"OrdenesPorMedicina",
+								"01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Órdenes Por Proveedor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/OrdenesPorProveedor/01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"OrdenesPorProveedor",
+								"01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Órdenes Por Costo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/OrdenesPorCosto",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"OrdenesPorCosto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Órdenes Por Estatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/OrdenesPorEstatus/EnProceso",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"OrdenesPorEstatus",
+								"EnProceso"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Órdenes Por Cantidad",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/OrdenesPorCantidad",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"OrdenesPorCantidad"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Órdenes Por Entrega Esperada",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/OrdenesPorEntregaEsperada/12-01-2023",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"OrdenesPorEntregaEsperada",
+								"12-01-2023"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Órdenes Por Fecha Orden",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/OrdenesPorFechaOrden/12-01-2023",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"OrdenesPorFechaOrden",
+								"12-01-2023"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Órdenes Por Fecha Entrega",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/OrdenesPorFechaEntrega/12-01-2023",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"OrdenesPorFechaEntrega",
+								"12-01-2023"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Órden",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IDOrden\": \"01\",\r\n    \"IDMedicina\": \"01\",\r\n    \"IDProveedor\": \"03\",\r\n    \"Cantidad\": \"02\",\r\n    \"Costo\": \"150.50\",\r\n    \"FechaOrden\": \"01/01/24\",\r\n    \"FechaEntrega\": \"01/01/24\",\r\n    \"Estatus\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/ordenes/ActualizarOrden/01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"ActualizarOrden",
+								"01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Orden",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IDMedicina\": \"01\",\r\n    \"IDProveedor\": \"03\",\r\n    \"Cantidad\": \"02\",\r\n    \"Costo\": \"150.50\",\r\n    \"FechaOrden\": \"01/01/24\",\r\n    \"FechaEntrega\": \"01/01/24\",\r\n    \"Estatus\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/ordenes/RegistrarOrden",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"RegistrarOrden"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Órden",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/ordenes/EliminarOrden/01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"ordenes",
+								"EliminarOrden",
 								"01"
 							]
 						}
