@@ -9,44 +9,43 @@ CREATE TABLE `Usuarios` (
   `Username` VARCHAR(100),
   `Password` VARCHAR(100),
   `TipoAcceso` ENUM('Almacen','Proveedor','Ejecutivo','Compras', 'Medico', 'Paciente', 'Administrador')
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Doctores`;
 
 CREATE TABLE `Doctores` (
   `IDDoctor` INT PRIMARY KEY AUTO_INCREMENT,
-  `IDUsuario` INT,
   `CedulaProfesional` INT NOT NULL,
   `Nombre` VARCHAR(255),
   `Apellido` VARCHAR(255),
   `FechaNacimiento` DATE,
   `CostoCita` DOUBLE,
-  `Especialidad` VARCHAR(255)
+  `Especialidad` VARCHAR(255),
+  `IDUsuario` INT,
   FOREIGN KEY (`IDUsuario`) REFERENCES `Usuarios`(`IDUsuario`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Pacientes`;
 
 CREATE TABLE `Pacientes` (
   `IDPaciente` INT PRIMARY KEY AUTO_INCREMENT,
-  `IDUsuario` INT,
   `Nombre` VARCHAR(255),
   `Apellido` VARCHAR(255),
   `Padecimento` VARCHAR(255),
   `EstatusPaciente` ENUM('Muerto','Critico', 'Atencion_Constante', 'Estable','Servicio_Expirado'),
-  `SaldoActual` DOUBLE
+  `SaldoActual` DOUBLE,
+  `IDUsuario` INT,
   FOREIGN KEY (`IDUsuario`) REFERENCES `Usuarios`(`IDUsuario`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Aseguradoras`;
 
 CREATE TABLE `Aseguradoras` (
-  `IDAseguradora` INT PRIMARY KEY,	
+  `IDAseguradora` INT PRIMARY KEY,  
   `NombreAseguradora` VARCHAR(100),
   `Direccion` VARCHAR(100),
   `NumContacto` VARCHAR(255)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `EmpresasTerceras`;
 
@@ -54,7 +53,7 @@ CREATE TABLE `EmpresasTerceras` (
   `idEmpresaTercera` INT PRIMARY KEY AUTO_INCREMENT,
   `Nombre` VARCHAR(255),
   `Descripcion` VARCHAR(255)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `PersonasApoyo`;
 
@@ -63,29 +62,29 @@ CREATE TABLE `PersonasApoyo` (
   `Nombre` VARCHAR(255),
   `Apellido` VARCHAR(255),
   `TipoDeServicio` VARCHAR(255)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Medicinas`;
 
 CREATE TABLE `Medicinas` (
   `IDMedicina` INT PRIMARY KEY AUTO_INCREMENT,
   `NombreMedicina` VARCHAR(255) NOT NULL,
-  `Descripción` TEXT,
+  `Descripcion` TEXT,
   `Precio_Unitario` DOUBLE,
   `Criticidad`  ENUM('Alto', 'Medio', 'Bajo'),
   `NivelDeInventario` INT
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `Proveedor`;
+DROP TABLE IF EXISTS `Proveedores`;
 
 CREATE TABLE `Proveedores` (
   `IDProveedor` INT PRIMARY KEY AUTO_INCREMENT,
-  `IDUsuario` INT,
   `Nombre` VARCHAR(255) NOT NULL,
   `Ubicación` VARCHAR(255),
-  `NumContacto` VARCHAR(255)
+  `NumContacto` VARCHAR(255),
+  `IDUsuario` INT,
   FOREIGN KEY (`IDUsuario`) REFERENCES `Usuarios`(`IDUsuario`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Polizas`;
 
@@ -94,17 +93,17 @@ CREATE TABLE `Polizas` (
   `IDAseguradora` INT,
   `Vigencia_de_Poliza` DATE,
   `TipoDePoliza` ENUM('Premium', 'Estandar', 'Basica'),
-  `SumaAsegurada` DOUBLE,	
+  `SumaAsegurada` DOUBLE,  
   `FechaInicio` DATE,
-  `Prima` Double,
+  `Prima` DOUBLE,
   FOREIGN KEY (`IDAseguradora`) REFERENCES `Aseguradoras`(`IDAseguradora`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Asignaciones`;
 
 CREATE TABLE `Asignaciones` (
   `IDPaciente` INT,
-  `FechaAsignacion` Date,
+  `FechaAsignacion` DATE,
   `IDDoctor` INT,
   `IDPersonaApoyo` INT,
   `IDPoliza` INT,
@@ -113,8 +112,7 @@ CREATE TABLE `Asignaciones` (
   FOREIGN KEY (`IDDoctor`) REFERENCES `Doctores`(`IDDoctor`),
   FOREIGN KEY (`IDPaciente`) REFERENCES `Pacientes`(`IDPaciente`),
   FOREIGN KEY (`IDPoliza`) REFERENCES `Polizas`(`IDPoliza`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Citas`;
 
@@ -127,7 +125,7 @@ CREATE TABLE `Citas` (
   `Fecha` DATE,
   FOREIGN KEY (`IDDoctor`) REFERENCES `Doctores`(`IDDoctor`),
   FOREIGN KEY (`IDPaciente`) REFERENCES `Pacientes`(`IDPaciente`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Receta`;
 
@@ -139,7 +137,7 @@ CREATE TABLE `Receta` (
   `Indicaciones` TEXT,
   FOREIGN KEY (`IDCita`) REFERENCES `Citas`(`IDCita`),
   FOREIGN KEY (`IDMedicina`) REFERENCES `Medicinas`(`IDMedicina`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Lote`;
 
@@ -154,18 +152,16 @@ CREATE TABLE `Lote` (
   `UbicacionAlmacen` VARCHAR(100),
   FOREIGN KEY (`IDProveedor`) REFERENCES `Proveedores`(`IDProveedor`),
   FOREIGN KEY (`IDMedicina`) REFERENCES `Medicinas`(`IDMedicina`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Factura`;
 
 CREATE TABLE `Factura` (
   `idFactura` INT PRIMARY KEY AUTO_INCREMENT,
   `idCita` INT,
-  `Costo` DOUBLE,/*No se si quieren dejarlo porque es un campo calculado de los demás costos*/
-  FOREIGN KEY (`IDCita`) REFERENCES `Citas`(`IDCita`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+  `Costo` DOUBLE,
+  FOREIGN KEY (`idCita`) REFERENCES `Citas`(`IDCita`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `ServiciosExtra`;
 
@@ -178,7 +174,7 @@ CREATE TABLE `ServiciosExtra` (
   `Estatus` ENUM('Realizado','Agendado','Cancelado'),
   FOREIGN KEY (`IDEmpresaTercera`) REFERENCES `EmpresasTerceras`(`IDEmpresaTercera`),
   FOREIGN KEY (`IDPaciente`) REFERENCES `Pacientes`(`IDPaciente`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `Ordenes`;
 
@@ -195,7 +191,7 @@ CREATE TABLE `Ordenes` (
   FOREIGN KEY (`IDProveedor`) REFERENCES `Proveedores`(`IDProveedor`),
   FOREIGN KEY (`IDMedicina`) REFERENCES `Medicinas`(`IDMedicina`),
   FOREIGN KEY (`IDUsuario`) REFERENCES `Usuarios`(`IDUsuario`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `LogInventarios`;
 
@@ -207,7 +203,4 @@ CREATE TABLE `LogInventarios` (
   `Cantidad` INT,
   FOREIGN KEY (`IDMedicina`) REFERENCES `Medicinas`(`IDMedicina`),
   FOREIGN KEY (`IDUsuario`) REFERENCES `Usuarios`(`IDUsuario`)
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

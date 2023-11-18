@@ -9,6 +9,8 @@ from backend.AseguradorasYPolizas import *
 from backend.Facturas import *
 from backend.Ordenes import *
 from backend.Usuarios import *
+from backend.Citas import *
+
 
 app = FastAPI()
 
@@ -351,6 +353,64 @@ async def postUsuarioAdministrador(usuario: dict):
 @app.delete("/usuarios/EliminarUsuario/{id}")
 async def deleteUsuario(id: int):
     return EliminarUsuario(id)
+
+
+# ____________________________________________________________Citas________________________________________________________________________
+
+@app.get("/citas/Todas")
+async def getCitas():
+    return ConsultarCitas()
+
+@app.get("/citas/Cita/{id}")
+async def getCita(id: int):
+    return ConsultarCita(id)
+
+@app.get("/citas/CitasPorPaciente/{id_paciente}")
+async def getCitasPorPaciente(id_paciente: int):
+    return ConsultarCitasPaciente(id_paciente)
+
+@app.get("/citas/CitasPorDoctor/{id_doctor}")
+async def getCitasPorDoctor(id_doctor: int):
+    return ConsultarCitasDoctor(id_doctor)
+
+@app.post("/citas/RegistrarCita")
+async def postCita(cita: dict):
+    try:
+        IDPaciente = cita["IDPaciente"]
+        IDDoctor = cita["IDDoctor"]
+        TipoCita = cita["TipoCita"]
+        EstatusCita = cita["EstatusCita"]
+        Fecha = cita["Fecha"]
+        return AgendarCita(IDPaciente, IDDoctor, TipoCita, Fecha, EstatusCita)
+    except:
+        return HTTPException(status_code=400, detail="Error al registrar la cita")
+    
+@app.post("/citas/ActualizarCita")
+async def putCita(cita: dict):
+    try:
+        IDCita = cita["IDCita"]
+        IDPaciente = cita["IDPaciente"]
+        IDDoctor = cita["IDDoctor"]
+        TipoCita = cita["TipoCita"]
+        EstatusCita = cita["EstatusCita"]
+        Fecha = cita["Fecha"]
+        return ActualizarCita(IDCita, IDPaciente, IDDoctor, TipoCita, EstatusCita, Fecha)
+    except:
+        return HTTPException(status_code=400, detail="Error al actualizar la cita")
+    
+@app.post("/citas/ActualizarEstatusCita")
+async def putCita(cita: dict):
+    try:
+        IDCita = cita["IDCita"]
+        EstatusCita = cita["EstatusCita"]
+        return ActualizarEstatusCita(IDCita, EstatusCita)
+    except:
+        return HTTPException(status_code=400, detail="Error al actualizar la cita")
+
+@app.delete("/citas/EliminarCita/{id}")
+async def deleteCita(id: int):
+    return EliminarCita(id)
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8081)

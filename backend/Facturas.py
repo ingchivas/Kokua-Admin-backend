@@ -22,7 +22,14 @@ def ConsultarFacturas():
         result = cursor.fetchall()
 
         if result:
-            return {"status": 200, "result": result}
+            facturas = []
+            for factura in result:
+                facturas.append({
+                    "idFactura": factura[0],
+                    "idCita": factura[1],
+                    "costo": factura[2]
+                })
+            return {"status": 200, "result": facturas}
         else:
             return {"status": 404, "message": "Facturas no encontradas"}
     
@@ -57,7 +64,13 @@ def ConsultarFacturaPorID(id_factura):
         result = cursor.fetchone()
 
         if result:
-            return {"status": 200, "result": result}
+            factura = []
+            factura.append({
+                "idFactura": result[0],
+                "idCita": result[1],
+                "costo": result[2]
+            })
+            return {"status": 200, "result": factura}
         else:
             return {"status": 404, "message": "Factura no encontrada"}
 
@@ -92,7 +105,16 @@ def ConsultarCitaAsociada(id_factura):
         result = cursor.fetchone()
 
         if result:
-            return {"status": 200, "result": result}
+            cita = []
+            cita.append({
+                "idCita": result[0],
+                "idPaciente": result[1],
+                "idDoctor": result[2],
+                "tipoCita": result[3],
+                "estatusCita": result[4],
+                "fecha": result[5]
+            })
+            return {"status": 200, "result": cita}
         else:
             return {"status": 404, "message": "Cita asociada no encontrada"}
 
@@ -221,7 +243,14 @@ def ConsultarFacturasOrdenadasPorCosto():
         cursor.execute("SELECT * FROM Factura ORDER BY Costo")
         result = cursor.fetchall()
         if result:
-            return {"status": 200, "result": result}
+            facturas = []
+            for factura in result:
+                facturas.append({
+                    "idFactura": factura[0],
+                    "idCita": factura[1],
+                    "costo": factura[2]
+                })
+            return {"status": 200, "result": facturas}
         else:
             return {"status": 404, "message": "Facturas no encontradas"}
     

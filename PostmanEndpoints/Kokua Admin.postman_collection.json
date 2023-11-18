@@ -301,14 +301,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/facturas/Factura/01",
+							"raw": "{{host}}/facturas/Factura/30",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"facturas",
 								"Factura",
-								"01"
+								"30"
 							]
 						}
 					},
@@ -1008,6 +1008,186 @@
 								"usuarios",
 								"EliminarUsuario",
 								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Citas",
+			"item": [
+				{
+					"name": "Todas las Citas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/citas/Todas",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"citas",
+								"Todas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cita por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/citas/Cita/15",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"citas",
+								"Cita",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Citas por paciente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/citas/CitasPorPaciente/11",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"citas",
+								"CitasPorPaciente",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Citas por doctor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/citas/CitasPorDoctor/01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"citas",
+								"CitasPorDoctor",
+								"01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Cita",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IDPaciente\": \"01\",\r\n    \"IDDoctor\": \"15\",\r\n    \"TipoCita\": \"01\",\r\n    \"EstatusCita\": \"02\",\r\n    \"Fecha\": \"2023-12-06\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/citas/RegistrarCita",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"citas",
+								"RegistrarCita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Cita",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IDCita\": \"02\",\r\n    \"IDPaciente\": \"01\",\r\n    \"IDDoctor\": \"15\",\r\n    \"TipoCita\": \"01\",\r\n    \"EstatusCita\": \"02\",\r\n    \"Fecha\": \"2023-12-06\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/citas/ActualizarCita",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"citas",
+								"ActualizarCita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IDCita\": \"12\",\r\n    \"EstatusCita\": \"02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/citas/ActualizarEstatusCita",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"citas",
+								"ActualizarEstatusCita"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Cita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/citas/EliminarCita/05",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"citas",
+								"EliminarCita",
+								"05"
 							]
 						}
 					},
