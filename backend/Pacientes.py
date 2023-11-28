@@ -137,7 +137,7 @@ def AgregarPaciente(paciente):
         cursor.execute("INSERT INTO Usuarios (Username, Password, TipoAcceso) VALUES (%s, %s, %s)", (paciente["Username"], paciente["Password"], paciente["TipoAcceso"]))
         connection.commit()
         id_usuario = cursor.lastrowid
-        cursor.execute("INSERT INTO Pacientes (Nombre, Apellido, Padecimento, EstatusPaciente, SaldoActual, IDUsuario) VALUES (%s, %s, %s, %s, %s, %s)", (paciente["Nombre"], paciente["Apellido"], paciente["Padecimento"], paciente["EstatusPaciente"], paciente["SaldoActual"], id_usuario))
+        cursor.execute("INSERT INTO Pacientes (Nombre, Apellido, Padecimento, EstatusPaciente, SaldoActual, IDUsuario, Email, Insurance) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", (paciente["Nombre"], paciente["Apellido"], paciente["Padecimento"], paciente["EstatusPaciente"], paciente["SaldoActual"], id_usuario, paciente["Email"], paciente["Insurance"]))
         connection.commit()
         return {"status": 200, "message": "Paciente agregado exitosamente"}
     
@@ -170,7 +170,7 @@ def AgregarPacienteSinUsuario(paciente):
     try:
         TipoAcceso = "Paciente"
         cursor = connection.cursor()
-        cursor.execute("INSERT INTO Pacientes (Nombre, Apellido, Padecimento, EstatusPaciente, SaldoActual) VALUES (%s, %s, %s, %s, %s)", (paciente["Nombre"], paciente["Apellido"], paciente["Padecimento"], paciente["EstatusPaciente"], paciente["SaldoActual"]))
+        cursor.execute("INSERT INTO Pacientes (Nombre, Apellido, Padecimento, EstatusPaciente, SaldoActual) VALUES (%s, %s, %s, %s, %s)", (paciente["Nombre"], paciente["Apellido"], paciente["Padecimento"], paciente["EstatusPaciente"], paciente["SaldoActual"], paciente["Email"], paciente["Insurance"]))
         connection.commit()
         return {"status": 200, "message": "Paciente agregado exitosamente"}
     
@@ -185,27 +185,17 @@ def AgregarPacienteSinUsuario(paciente):
             print("Conexión cerrada")
 
 def ActualizarPaciente(id_paciente, paciente):
-    """ 
-    Actualiza los datos de un paciente específico
-
-    Args:
-        id_paciente (int): ID del paciente a actualizar
-        paciente (dict): Diccionario con los datos del paciente a actualizar
-
-    Returns:
-        (dict): Diccionario con el resultado de la operación
-    """
-    
-    # primero actualizar el usuario, obtener el id y luego actualizar el paciente
     connection = DBConnection()
     if connection is None:
         return {"status": 500, "message": "Error al conectar con la base de datos"}
     
     try:
         cursor = connection.cursor()
-        cursor.execute("UPDATE Usuarios SET Username = %s, Password = %s, TipoAcceso = %s WHERE IDUsuario = %s", (paciente["Username"], paciente["Password"], paciente["TipoAcceso"], paciente["IDUsuario"]))
+        cursor.execute("UPDATE Usuarios SET Username = %s, Password = %s, TipoAcceso = %s WHERE IDUsuario = %s", 
+                       (paciente["Username"], paciente["Password"], paciente["TipoAcceso"], paciente["IDUsuario"]))
         connection.commit()
-        cursor.execute("UPDATE Pacientes SET Nombre = %s, Apellido = %s, Padecimento = %s, EstatusPaciente = %s, SaldoActual = %s WHERE IDPaciente = %s", (paciente["Nombre"], paciente["Apellido"], paciente["Padecimento"], paciente["EstatusPaciente"], paciente["SaldoActual"], id_paciente))
+        cursor.execute("UPDATE Pacientes SET Nombre = %s, Apellido = %s, Padecimento = %s, EstatusPaciente = %s, SaldoActual = %s, Email = %s, Insurance = %s WHERE IDPaciente = %s", 
+                       (paciente["Nombre"], paciente["Apellido"], paciente["Padecimento"], paciente["EstatusPaciente"], paciente["SaldoActual"], paciente["Email"], paciente["Insurance"], id_paciente))
         connection.commit()
         return {"status": 200, "message": "Paciente actualizado exitosamente"}
     

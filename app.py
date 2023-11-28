@@ -11,6 +11,7 @@ from backend.Ordenes import *
 from backend.Usuarios import *
 from backend.Citas import *
 from backend.Pacientes import *
+from fastapi.staticfiles import StaticFiles
 
 
 app = FastAPI()
@@ -24,9 +25,20 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Serve static files (images, CSS, etc.)
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+
+
 @app.get("/")
 async def root():
     return FileResponse("frontend/index.html")
+
+@app.get("/Registro")
+async def registro():
+    return FileResponse("frontend/pages/forms.html")
+
+#______________________________________________________Imagenes_________________________________________________________________
+
 
 #______________________________________________________Aseguradoras_________________________________________________________________
 
@@ -425,6 +437,10 @@ async def getPaciente(id: int):
 @app.post("/pacientes/AgregarPaciente")
 async def postPaciente(paciente: dict):
     try:
+        paciente = paciente["paciente"]
+    except:
+        pass
+    try:
         Nombre = paciente["Nombre"]
         Apellido = paciente["Apellido"]
         Padecimento = paciente["Padecimento"]
@@ -433,6 +449,8 @@ async def postPaciente(paciente: dict):
         Username = paciente["Username"]
         Password = paciente["Password"]
         TipoAcceso = paciente["TipoAcceso"]
+        Email = paciente["Email"]
+        insurance = paciente["Insurance"]
         
         return AgregarPaciente({
             "Nombre": Nombre,
@@ -440,6 +458,9 @@ async def postPaciente(paciente: dict):
             "Padecimento": Padecimento,
             "EstatusPaciente": EstatusPaciente,
             "SaldoActual": SaldoActual,
+            "TipoAcceso": TipoAcceso,
+            "Email": Email,
+            "Insurance": insurance,
             "Username": Username,
             "Password": Password
         })
@@ -454,13 +475,17 @@ async def postPaciente(paciente: dict):
         Padecimento = paciente["Padecimento"]
         EstatusPaciente = paciente["EstatusPaciente"]
         SaldoActual = paciente["SaldoActual"]
+        Email = paciente["Email"]
+        insurance = paciente["Insurance"]
         
         return AgregarPacienteSinUsuario({
             "Nombre": Nombre,
             "Apellido": Apellido,
             "Padecimento": Padecimento,
             "EstatusPaciente": EstatusPaciente,
-            "SaldoActual": SaldoActual
+            "SaldoActual": SaldoActual,
+            "Email": Email,
+            "Insurance": insurance
         })
     except:
         return {"status": 400, "message": "Error al agregar el paciente"}
@@ -476,6 +501,8 @@ async def putPaciente(id: int, paciente: dict):
         Username = paciente["Username"]
         Password = paciente["Password"]
         TipoAcceso = paciente["TipoAcceso"]
+        Email = paciente["Email"]
+        insurance = paciente["Insurance"]
         
         return ActualizarPaciente(id, {
             "Nombre": Nombre,
@@ -483,6 +510,8 @@ async def putPaciente(id: int, paciente: dict):
             "Padecimento": Padecimento,
             "EstatusPaciente": EstatusPaciente,
             "SaldoActual": SaldoActual,
+            "Email": Email,
+            "Insurance": insurance,
             "Username": Username,
             "Password": Password,
             "TipoAcceso": TipoAcceso

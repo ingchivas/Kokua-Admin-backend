@@ -35,6 +35,8 @@ CREATE TABLE `Pacientes` (
   `EstatusPaciente` ENUM('Muerto','Critico', 'Atencion_Constante', 'Estable','Servicio_Expirado'),
   `SaldoActual` DOUBLE,
   `IDUsuario` INT,
+  `Email` VARCHAR(255),
+  `Insurance` ENUM('Si','No'), 
   FOREIGN KEY (`IDUsuario`) REFERENCES `Usuarios`(`IDUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

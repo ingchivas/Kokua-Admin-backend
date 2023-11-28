@@ -1,117 +1,110 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="icon" type="image/png" href="../img/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <title>Home | KOKUA admin</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
-      <a class="navbar-brand" href="../index.html"
-        ><img
-          class="img-fluid"
-          src="img/KokuaLogo.png"
-          class="mx-auto d-block"
-          height="150"
-          width="150"
-      /></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapsibleNavbar"
-      >
-        <span class="navbar-toggler-icon"></span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="icon" type="image/png" href="/static/img/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  <title>Home | KOKUA admin</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <a class="navbar-brand" href="../index.html">
+      <img class="img-fluid" src="/static/img/KokuaLogo.png" class="mx-auto d-block" height="150" width="150" />
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="pages/forms.html">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Patient care</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Online chat</a>
+        </li>
+      </ul>
+    </div>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+        Search
       </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="pages/forms.html">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Patient care</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">Online chat</a>
-          </li>
-        </ul>
+    </form>
+  </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="welcome" class="col">
+        <br />
+        <h1 style="color: #ffffff">Welcome to KOKUA!</h1>
+        <p id="type1">
+          Register to create an account with us and become part of KOKUA
+        </p>
+        <br />
       </div>
-      <form class="form-inline">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-          Search
-        </button>
-      </form>
-    </nav>
-    <div class="container-fluid">
-      <div class="row">
-        <div id="welcome" class="col">
-          <br />
-          <h1 style="color: #ffffff">Welcome to KOKUA!</h1>
-          <p id="type1">
-            Register to create an account with us and become part of KOKUA
-          </p>
-          <br />
-        </div>
-        <div class="col-sm-6">
-          <br />
-          <center>
-            <h2 style="color: #013c9e">Select your registration type</h2>
-          </center>
-          <br />
-          <div class="container">
-            <div class="row">
-              <div class="col">
-                <img
-                  class="first"
-                  src="img/applicant.png"
-                  width="100"
-                  heigh="100"
-                />
-                <p>
-                  Patient <br />
-                  applicant
-                </p>
-              </div>
-              <div class="col">
-                <img
-                  class="first"
-                  src="img/patient.png"
-                  width="100"
-                  heigh="100"
-                />
-                <p>Patient</p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <img class="first" src="img/plus.jpg" width="100" heigh="100" />
-                <p>Register now</p>
-              </div>
-              <br />
-              <p id="google">
-                <img src="img/google.png" height="30" width="30" /> Continue
-                with Google
+      <div class="col-sm-6">
+        <br />
+        <center>
+          <h2 style="color: #013c9e">Select your registration type</h2>
+        </center>
+        <br />
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <img class="first" src="/static/img/applicant.png" width="100" height="100" />
+              <p>
+                Patient <br />
+                applicant
               </p>
             </div>
+            <div class="col">
+              <img class="first" src="/static/img/patient.png" width="100" height="100" />
+              <p>Patient</p>
+            </div>
           </div>
+          <div class="row">
+            <div class="col">
+              <img class="first" src="/static/img/plus.jpg" width="100" height="100" onclick="redirectToRegistro()"
+                style="cursor: pointer;" />
+              <p>Register now</p>
+            </div>
+            <br />
+          </div>
+          <br />
         </div>
       </div>
     </div>
-  </body>
+  </div>
+  <script>
+    function redirectToRegistro() {
+      // Realizar la petición al servidor
+      fetch('http://localhost:8081/Registro')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        
+        // Redireccionar a la página de registro
+        .then(data => {
+          window.location.href = 'http://localhost:8081/Registro';
+        })
+        .catch(error => {
+          console.error('There has been a problem with your fetch operation:', error);
+        });
+    }
+  </script>
+</body>
+
 </html>

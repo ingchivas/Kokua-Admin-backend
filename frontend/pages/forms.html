@@ -1,142 +1,187 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="icon" type="image/png" href="../img/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <title>Register | KOKUA admin</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
-      <a class="navbar-brand" href="../index.html"
-        ><img
-          class="img-fluid"
-          src="../img/KokuaLogo.png"
-          class="mx-auto d-block"
-          height="150"
-          width="150"
-      /></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#collapsibleNavbar"
-      >
-        <span class="navbar-toggler-icon"></span>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>Registro | KOKUA admin</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+    <a class="navbar-brand" href="../index.html"><img class="img-fluid" src="/static/img/KokuaLogo.png"
+        class="mx-auto d-block" height="150" width="150" /></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" style="margin-right: 20px;">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="margin-right: 20px;">Cuidado del Paciente</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="margin-right: 20px;">Chat en Línea</a>
+        </li>
+      </ul>
+    </div>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" />
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+        Buscar
       </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav ml-auto"> <!-- Added ml-auto to push the items to the right -->
-        <li class="nav-item">
-            <a class="nav-link" style="margin-right: 20px;">About Us</a> <!-- Added margin-right -->
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" style="margin-right: 20px;">Patient Care</a> <!-- Added margin-right -->
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" style="margin-right: 20px;">Online Chat</a> <!-- Added margin-right -->
-        </li>
-        </ul>
+    </form>
+  </nav>
+  <div class="container">
+    <br />
+    <h2>Información Personal</h2>
+    <br />
+    <form>
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input type="text" class="form-control" id="name" name="name" />
       </div>
-      <form class="form-inline">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-          Search
-        </button>
-      </form>
-    </nav>
-    <div class="container">
-      <br />
-      <h2>Personal Information</h2>
-      <br />
-      <form action="/action_page.php">
+      <div class="form-group">
+        <label for="lname">Apellido:</label>
+        <input type="text" class="form-control" id="lname" name="lname" />
+      </div>
+      <div class="form-group">
+        <label for="dob">Padecimiento:</label>
+        <input type="text" class="form-control" id="Padecimiento" name="Padecimiento" />
         <div class="form-group">
-          <label for="name">Full Name:</label>
-          <input type="text" class="form-control" id="name" name="name" />
-        </div>
-        <div class="form-group">
-          <label for="brthdt">Birth Date:</label>
-          <input type="text" class="form-control" id="brthdt" name="brthdt" />
-        </div>
-        <div class="form-group">
-          <label for="brthplc">Birth Place:</label>
-          <input type="text" class="form-control" id="brthplc" name="brthplc" />
-        </div>
-        <div class="form-group">
-          <label for="gender">Gender:</label>
-          <input type="text" class="form-control" id="gender" name="gender" />
-        </div>
-        <div class="form-group">
-          <label for="citizen">Citizenship:</label>
-          <input type="text" class="form-control" id="citizen" name="citizen" />
-        </div>
-        <div class="form-group">
-          <label for="email">Email:</label>
+          <label for="email">Correo Electrónico:</label>
           <input type="text" class="form-control" id="email" name="email" />
         </div>
         <div class="form-group">
-          <label for="address">Address:</label>
-          <input type="text" class="form-control" id="address" name="address" />
+          <label for="estatus">Estatus del Paciente:</label>
+          <select class="form-control" id="estatus" name="estatus">
+            <option value="Critico">Crítico</option>
+            <option value="Atencion_Constante">Atención Constante</option>
+            <option value="Estable">Estable</option>
+            <option value="Servicio_Expirado">Servicio Expirado</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="phone">Phone Number:</label>
-          <input type="text" class="form-control" id="phone" name="phone" />
-        </div>
-        <div class="form-group">
-          <label for="docs">Upload your documents:</label>
+          <label for="docs">Sube tus documentos:</label>
           <input type="file" class="form-control" id="customFile" />
         </div>
-        <div class="form-group">
-          <label for="civil">Civil Status:</label>
-          <input type="text" class="form-control" id="civil" name="civil" />
-        </div>
-        <h3>Do you have insurance?:</h3>
+        <h3>¿Tienes seguro médico?:</h3>
         <div class="btn-group">
-          <button type="button" class="btn btn-primary">Yes</button>
-          <button type="button" class="btn btn-primary">No</button>
+          <select class="form-control" id="seguro" name="seguro">
+            <option value="Si">Si</option>
+            <option value="No">No</option>
+          </select>
         </div>
         <br />
         <br />
-        <label for="docs">Upload your policy:</label>
+        <label for="docs">Sube tu póliza:</label>
         <input type="file" class="form-control" id="customFile" />
         <p>
           <br />
-          <b>NOTICE:</b> If you do not have insurance, you should be aware that
-          the payment for your treatment will be on your own.
+          <b>AVISO:</b> Si no tienes seguro médico, debes saber que el pago por tu tratamiento será por tu cuenta.
         </p>
         <br />
         <div class="form-group form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" name="remember" />
-            By selecting this option you agree with our privacy policy
+            <input class="form-check-input" type="checkbox" name="remember" id="ConfirmacionT&C" />
+            Al seleccionar esta opción, aceptas nuestra política de privacidad.
           </label>
         </div>
         <div class="form-group form-check">
           <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" name="remember" />
-            You will receive a confirmation email with your new account when you
-            have accepted our policy
+            <input class="form-check-input" type="checkbox" name="remember" id="ConfirmacionCorreo" />
+            Recibirás un correo electrónico de confirmación con tu nueva cuenta cuando hayas aceptado nuestra política.
           </label>
         </div>
         <br />
-        <button type="submit" class="btn btn-primary">
-          Complete Registration
+        <button class="btn btn-primary" type="button" id="MandarFormulario" >
+          Completar Registro
         </button>
-      </form>
-      <br />
-    </div>
-  </body>
+      </div>             
+    </form>
+    <br />
+  </div>
+  <script>
+    console.log('Script cargado correctamente');
+  
+    function submitForm() {
+      console.log('Botón clickeado');
+  
+      // Verificar si ambas casillas están seleccionadas
+      const aceptoTerminos = document.getElementById('ConfirmacionT&C').checked;
+      const aceptoCorreo = document.getElementById('ConfirmacionCorreo').checked;
+  
+      if (!aceptoTerminos || !aceptoCorreo) {
+        alert('Debes aceptar ambas casillas para completar el registro.');
+        return;
+      }
+  
+      // Obtener los datos del formulario
+      const name = document.getElementById('name').value;
+      const lname = document.getElementById('lname').value;
+      const email = document.getElementById('email').value;
+      const padecimiento = document.getElementById('Padecimiento').value;
+      const estatus = document.getElementById('estatus').value;
+      const seguro = document.getElementById('seguro').value;
+  
+      
+      
+  
+      // Generar la contraseña aleatoria
+      const generateRandomPassword = (length) => {
+        const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let password = '';
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * charset.length);
+          password += charset.charAt(randomIndex);
+        }
+        return password;
+      };
+  
+      // Crear el objeto paciente
+      const paciente = {
+        Nombre: name,
+        Apellido: lname,
+        Padecimento: padecimiento,
+        EstatusPaciente: estatus,
+        SaldoActual: "0",
+        Username: name + lname,
+        Password: generateRandomPassword(10),
+        TipoAcceso: 'Paciente',
+        Email: email,
+        Insurance: seguro,
+      };
+  
+      // Enviar los datos al endpoint
+      fetch('http://localhost:8081/pacientes/AgregarPaciente', {
+        method: 'POST',
+        body: JSON.stringify({ paciente: paciente }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => {
+          if (response.ok) {
+            alert('Formulario enviado correctamente.');
+          } else {
+            alert('Error en el envío del formulario. Por favor, inténtalo de nuevo.');
+          }
+          return response.json();
+        })
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+    }
+  
+    document.getElementById('MandarFormulario').addEventListener('click', submitForm);
+  </script>
+  
+</body>
+
 </html>

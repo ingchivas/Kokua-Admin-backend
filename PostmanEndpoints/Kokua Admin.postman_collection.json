@@ -1224,14 +1224,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/pacientes/Paciente/1",
+							"raw": "{{host}}/pacientes/Paciente/103",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"pacientes",
 								"Paciente",
-								"1"
+								"103"
 							]
 						}
 					},
@@ -1244,7 +1244,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Nombre\": \"Ernesto\",\r\n    \"Apellido\": \"Gonzales Reyes\",\r\n    \"Padecimento\": \"Cancer de páncreas\",\r\n    \"EstatusPaciente\": \"2\",\r\n    \"SaldoActual\": \"12346\",\r\n    \"Username\": \"EGonzales\",\r\n    \"Password\": \"PasswordChingon@2324\",\r\n    \"TipoAcceso\": \"Paciente\"\r\n}",
+							"raw": "{\r\n    \"Nombre\": \"Ernesto\",\r\n    \"Apellido\": \"Gonzales Reyes\",\r\n    \"Padecimento\": \"Cancer de páncreas\",\r\n    \"EstatusPaciente\": \"2\",\r\n    \"SaldoActual\": \"12346\",\r\n    \"Username\": \"EGonzales\",\r\n    \"Password\": \"PasswordChingon@2324\",\r\n    \"TipoAcceso\": \"Paciente\",\r\n    \"Email\": \"ernesto@gmail.com\",\r\n    \"Insurance\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1252,10 +1252,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/pacientes/AgregarPaciente",
+							"raw": "Localhost:8081/pacientes/AgregarPaciente",
 							"host": [
-								"{{host}}"
+								"Localhost"
 							],
+							"port": "8081",
 							"path": [
 								"pacientes",
 								"AgregarPaciente"
@@ -1271,7 +1272,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Nombre\": \"Emmanuel\",\r\n    \"Apellido\": \"Reyes\",\r\n    \"Padecimento\": \"Cancer de páncreas\",\r\n    \"EstatusPaciente\": \"2\",\r\n    \"SaldoActual\": \"12346\"\r\n}",
+							"raw": "{\r\n    \"Nombre\": \"Emmanuel\",\r\n    \"Apellido\": \"Reyes\",\r\n    \"Padecimento\": \"Cancer de páncreas\",\r\n    \"EstatusPaciente\": \"2\",\r\n    \"SaldoActual\": \"12346\",\r\n    \"Email\": \"EmmanuelReyes@gmail.com\",\r\n    \"Insurance\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
