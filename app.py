@@ -28,7 +28,7 @@ app.add_middleware(
 # Serve static files (images, CSS, etc.)
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
-
+# _____________________________________________Vistas______________________________________________
 @app.get("/")
 async def root():
     return FileResponse("frontend/index.html")
@@ -37,7 +37,25 @@ async def root():
 async def registro():
     return FileResponse("frontend/pages/forms.html")
 
-#______________________________________________________Imagenes_________________________________________________________________
+@app.get("/Home")
+async def home():
+    return FileResponse("frontend/homepage/home.html")
+
+@app.get("/Aseguradoras")
+async def aseguradoras():
+    return FileResponse("frontend/homepage/aseguradoras.html")
+
+@app.get("/registrarAseguradora")
+async def vistaregaseguradora():
+    return FileResponse("frontend/homepage/registraraseguradora.html")
+
+@app.get("/polizasPorAseguradora/{id}")
+async def vistaregaseguradora():
+    return FileResponse("frontend/homepage/polizasPorAseguradora.html")
+
+@app.get("/RegistrarPoliza")
+async def registrarpolizavista():
+    return FileResponse("frontend/homepage/registrarPoliza.html")
 
 
 #______________________________________________________Aseguradoras_________________________________________________________________

@@ -336,7 +336,8 @@ def ConsultarPolizas():
                     'TipoDePoliza': i[3],
                     'SumaAsegurada': i[4],
                     'FechaInicio': i[5],
-                    'Prima': i[6]
+                    'Prima': i[6],
+                    'IDPaciente': i[7]
                 })
             return {"status": 200, "result": polizas}
         else:

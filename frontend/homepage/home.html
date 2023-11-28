@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin</title>
+  <link rel="stylesheet" href="/static/homepage/homestyle.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2">
+        <!-- --------------------------------------------- SIDE BAR -------------------------------------------------------------- -->
+        <div class="sidebar">
+          <div class="dots">
+            <h3>Kokua</h3>
+          </div>
+          <div class="logo">
+            <img class="img-fluid" src="/static/img/KokuaLogo.png" class="mx-auto d-block" height="150" width="150" />
+          </div>
+          <ul>
+            <li>
+              <a href="#" id="homeButton">
+                <ion-icon name="home-outline"></ion-icon>
+                <p>Inicio</p>
+              </a>
+              <a href="#" id="Aseguradoras">
+                <p>Aseguradoras</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- ------------------------------------------- END OF SIDE BAR ----------------------------------------------- -->
+      </div>
+      <div class="col-lg-3 mt-4 mx-auto text-center">
+        <!-- Tarjeta de aseguradoras -->
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Número de Aseguradoras</h5>
+            <p class="card-text" id="aseguradorasCount">Cargando...</p>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Número de Pólizas</h5>
+              <p class="card-text" id="polizasCount">Cargando...</p>
+            </div>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h5 class="card-title">Número de Pacientes</h5>
+                <p class="card-text" id="pacientesCount">Cargando...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráfica de pastel por ID de aseguradora -->
+      <canvas id="polizasPorAseguradoraChart" width="200" height="200"></canvas>
+
+      <!-- Gráfica de pastel por tipo de póliza -->
+      <canvas id="polizasPorTipoChart" width="200" height="200"></canvas>
+    </div>
+  </div>
+
+  <!-- CIERRE DE CONTAINER -->
+  <script>
+
+    function redirectToHome() {
+      window.location.href = "/Home";
+    }
+
+    function redirectAseguradoras() {
+      window.location.href = "/Aseguradoras";
+    }
+
+    fetch("https://kokuaadminbackend.eviniegra.software/polizas/Todas")
+      .then(response => response.json())
+      .then(data => {
+        // Obtener el número de pólizas
+        const polizasCount = data.result.length;
+
+        // Actualizar el contenido de la primera tarjeta
+        const polizasCountElement = document.getElementById("polizasCount");
+        polizasCountElement.textContent = `Total: ${polizasCount} pólizas`;
+      })
+      .catch(error => console.error("Error al obtener datos de pólizas:", error));
+
+    // Hacer la solicitud AJAX para obtener datos de pacientes
+    fetch("https://kokuaadminbackend.eviniegra.software/pacientes/Todos")
+      .then(response => response.json())
+      .then(data => {
+        // Obtener el número de pacientes
+        const pacientesCount = data.result.length;
+
+        // Actualizar el contenido de la segunda tarjeta
+        const pacientesCountElement = document.getElementById("pacientesCount");
+        pacientesCountElement.textContent = `Total: ${pacientesCount} pacientes`;
+      })
+      .catch(error => console.error("Error al obtener datos de pacientes:", error));
+
+    // Hacer la solicitud AJAX para obtener datos de aseguradoras
+    fetch("https://kokuaadminbackend.eviniegra.software/aseguradoras/Todas")
+      .then(response => response.json())
+      .then(data => {
+        // Obtener el número de aseguradoras
+        const aseguradorasCount = data.result.length;
+
+        // Actualizar el contenido de la tercera tarjeta
+        const aseguradorasCountElement = document.getElementById("aseguradorasCount");
+        aseguradorasCountElement.textContent = `Total: ${aseguradorasCount} aseguradoras`;
+      })
+      .catch(error => console.error("Error al obtener datos de aseguradoras:", error));
+
+    // Evento de clic para el botón de Inicio en el sidebar
+    const homeButton = document.querySelector("#homeButton");
+    homeButton.addEventListener("click", redirectToHome);
+
+    const aseguradorasButton = document.querySelector("#Aseguradoras");
+    aseguradorasButton.addEventListener("click", redirectAseguradoras);
+
+  </script>
+
+  </script>
+</body>
+
+</html>

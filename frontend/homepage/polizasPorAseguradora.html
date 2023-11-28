@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Polizas Por Aseguradora</title>
+    <link rel="stylesheet" href="/static/homepage/homestyle.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <style>
+        .main-content {
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+                <!-- --------------------------------------------- SIDE BAR -------------------------------------------------------------- -->
+                <div class="sidebar">
+                    <div class="dots">
+                      <h3>Kokua</h3>
+                    </div>
+                    <div class="logo">
+                      <img class="img-fluid" src="/static/img/KokuaLogo.png" class="mx-auto d-block" height="150" width="150" />
+                    </div>
+                    <ul>
+                      <li>
+                        <a href="#" id="homeButton">
+                          <ion-icon name="home-outline"></ion-icon>
+                          <p>Inicio</p>
+                        </a>
+                        <a href="#" id="Aseguradoras">
+                          <p>Aseguradoras</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                <!-- ------------------------------------------- END OF SIDE BAR ----------------------------------------------- -->
+            </div>
+            <div class="col-lg-10">
+                <!-- --------------------------------------------- Contenido Principal ------------------------------------------------- -->
+                <div class="main-content">
+                    <h1>Listado de Pólizas Por Aseguradora</h1>
+
+                    <table id="polizasTable">
+                        <button id="registrarPolizaButton">Registrar Poliza</button>
+                        <!-- La tabla generada por JavaScript se insertará aquí -->
+                    </table>
+                </div>
+                <!-- ------------------------------------------- Fin del Contenido Principal --------------------------------------- -->
+            </div>
+        </div>
+    </div>
+    <script>
+        function redirectToHome() {
+            window.location.href = "/Home";
+        }
+
+        function redirectToAseguradoras() {
+            window.location.href = "/Aseguradoras";
+        }
+
+        function redirectRegistrarPoliza(){
+            window.location.href = "/RegistrarPoliza"
+        }
+
+        function GetPolizasPorAseguradora() {
+            // Obtén el ID de la aseguradora desde la URL
+
+            var urlCompleta = window.location.href;
+            console.log("URL completa: " + urlCompleta);
+            const idAseguradora = window.location.pathname.split('/').pop();
+            console.log(idAseguradora)
+
+            // Hacer la solicitud GET al endpoint `/polizas/PolizasPorAseguradora/{id}`
+            fetch(`https://kokuaadminbackend.eviniegra.software/polizas/PolizasPorAseguradora/${idAseguradora}`)
+                .then(response => response.json())
+                .then(data => renderPolizasTable(data.result))
+                .catch(error => console.error('Error fetching pólizas:', error));
+        }
+
+        function renderPolizasTable(polizas) {
+            const table = document.getElementById('polizasTable');
+
+            // Crea la cabecera de la tabla
+            const headerRow = table.insertRow(0);
+            for (const key in polizas[0]) {
+                const th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
+            }
+
+            // Llena la tabla con los datos de las pólizas
+            polizas.forEach(poliza => {
+                const row = table.insertRow();
+                for (const key in poliza) {
+                    const cell = row.insertCell();
+                    cell.textContent = poliza[key];
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", GetPolizasPorAseguradora);
+
+        const homeButton = document.querySelector("#homeButton");
+        homeButton.addEventListener("click", redirectToHome);
+
+        const aseguradorasButton = document.querySelector("#Aseguradoras");
+        aseguradorasButton.addEventListener("click", redirectToAseguradoras);
+
+        const registrarPolizaButton = document.querySelector("#registrarPolizaButton");
+        registrarPolizaButton.addEventListener("click", redirectRegistrarPoliza);
+    </script>
+</body>
+
+</html>

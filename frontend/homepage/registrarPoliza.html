@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Póliza</title>
+    <link rel="stylesheet" href="/static/homepage/homestyle.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <style>
+        .main-content {
+            padding: 20px;
+        }
+
+        form {
+            width: 50%;
+            margin: auto;
+        }
+
+        label {
+            margin-top: 10px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            margin-top: 5px;
+            padding: 8px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-2">
+                <!-- --------------------------------------------- SIDE BAR -------------------------------------------------------------- -->
+                <div class="sidebar">
+                    <div class="dots">
+                      <h3>Kokua</h3>
+                    </div>
+                    <div class="logo">
+                      <img class="img-fluid" src="/static/img/KokuaLogo.png" class="mx-auto d-block" height="150" width="150" />
+                    </div>
+                    <ul>
+                      <li>
+                        <a href="#" id="homeButton">
+                          <ion-icon name="home-outline"></ion-icon>
+                          <p>Inicio</p>
+                        </a>
+                        <a href="#" id="Aseguradoras">
+                          <p>Aseguradoras</p>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                <!-- ------------------------------------------- END OF SIDE BAR ----------------------------------------------- -->
+            </div>
+            <div class="col-lg-10">
+                <!-- --------------------------------------------- Contenido Principal ------------------------------------------------- -->
+                <div class="main-content">
+                    <h1>Registrar Póliza</h1>
+                    <form id="polizaForm">
+                        <label for="IDAseguradora">ID Aseguradora:</label>
+                        <input type="text" id="IDAseguradora" name="IDAseguradora" required />
+
+                        <label for="Vigencia_de_Poliza">Vigencia de Póliza:</label>
+                        <input type="text" id="Vigencia_de_Poliza" name="Vigencia_de_Poliza" required />
+
+                        <label for="TipoDePoliza">Tipo de Póliza:</label>
+                        <input type="text" id="TipoDePoliza" name="TipoDePoliza" required />
+
+                        <label for="SumaAsegurada">Suma Asegurada:</label>
+                        <input type="text" id="SumaAsegurada" name="SumaAsegurada" required />
+
+                        <label for="FechaInicio">Fecha de Inicio:</label>
+                        <input type="text" id="FechaInicio" name="FechaInicio" required />
+
+                        <label for="Prima">Prima:</label>
+                        <input type="text" id="Prima" name="Prima" required />
+
+                        <button type="button" onclick="registrarPoliza()">Registrar Póliza</button>
+                    </form>
+                </div>
+                <!-- ------------------------------------------- Fin del Contenido Principal --------------------------------------- -->
+            </div>
+        </div>
+    </div>
+    <script>
+        function redirectToHome() {
+            window.location.href = "/Home";
+        }
+
+        function redirectToAseguradoras() {
+            window.location.href = "/Aseguradoras";
+        }
+
+        function redirectToRegistrarPoliza() {
+            window.location.href = "/registrarPoliza";
+        }
+
+        function registrarPoliza() {
+            // Obtén los datos del formulario
+            const polizaData = {
+                IDAseguradora: document.getElementById('IDAseguradora').value,
+                Vigencia_de_Poliza: document.getElementById('Vigencia_de_Poliza').value,
+                TipoDePoliza: document.getElementById('TipoDePoliza').value,
+                SumaAsegurada: document.getElementById('SumaAsegurada').value,
+                FechaInicio: document.getElementById('FechaInicio').value,
+                Prima: document.getElementById('Prima').value
+            };
+
+            // Hacer la solicitud POST al endpoint "/polizas/RegistrarPoliza"
+            fetch("https://kokuaadminbackend.eviniegra.software/polizas/RegistrarPoliza", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(polizaData),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Manejar la respuesta según tus necesidades
+                    console.log(data);
+                    // Redirigir a la página de pólizas por aseguradora u otra vista si es necesario
+                    // window.location.href = "/polizasPorAseguradora/" + polizaData.IDAseguradora;
+                })
+                .catch(error => console.error('Error al registrar póliza:', error));
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const homeButton = document.querySelector("#homeButton");
+            homeButton.addEventListener("click", redirectToHome);
+
+            const aseguradorasButton = document.querySelector("#Aseguradoras");
+            aseguradorasButton.addEventListener("click", redirectToAseguradoras);
+
+            const registrarPolizaButton = document.querySelector("#RegistrarPoliza");
+            registrarPolizaButton.addEventListener("click", redirectToRegistrarPoliza);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Aseguradora</title>
+    <link rel="stylesheet" href="/static/homepage/homestyle.css" />
+    <!-- Agrega cualquier enlace a estilos adicionales si es necesario -->
+    <style>
+      .container-fluid {
+        padding: 20px;
+      }
+
+      .main-content {
+        padding: 20px;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input {
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-2">
+            <div class="sidebar">
+                <div class="dots">
+                  <h3>Kokua</h3>
+                </div>
+                <div class="logo">
+                  <img class="img-fluid" src="/static/img/KokuaLogo.png" class="mx-auto d-block" height="150" width="150" />
+                </div>
+                <ul>
+                  <li>
+                    <a href="#" id="homeButton">
+                      <ion-icon name="home-outline"></ion-icon>
+                      <p>Inicio</p>
+                    </a>
+                    <a href="#" id="Aseguradoras">
+                      <p>Aseguradoras</p>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+        </div>
+        <div class="col-lg-10">
+          <!-- ... (tu contenido principal) ... -->
+          <div class="main-content">
+            <h1>Registro de Aseguradora</h1>
+            <form id="registrarAseguradoraForm">
+              <label for="NombreAseguradora">Nombre de la Aseguradora:</label>
+              <input type="text" id="NombreAseguradora" name="NombreAseguradora" required>
+
+              <label for="Direccion">Dirección:</label>
+              <input type="text" id="Direccion" name="Direccion" required>
+
+              <label for="NumContacto">Número de Contacto:</label>
+              <input type="text" id="NumContacto" name="NumContacto" required>
+
+              <!-- Puedes agregar más campos según tus necesidades -->
+
+              
+            </form>
+            <button type="button" onclick="registrarAseguradora()">Registrar Aseguradora</button>
+            <button class="back-button" onclick="regresarTablaAseguradoras()">Regresar</button>
+          </div>
+          <!-- ... (fin del contenido principal) ... -->
+        </div>
+      </div>
+    </div>
+    <script>
+      function registrarAseguradora() {
+        // Obtener los valores del formulario
+        const nombreAseguradora = document.getElementById("NombreAseguradora").value;
+        const direccion = document.getElementById("Direccion").value;
+        const numContacto = document.getElementById("NumContacto").value;
+
+        // Construir el objeto JSON con los datos del formulario
+        const aseguradoraData = {
+          NombreAseguradora: nombreAseguradora,
+          Direccion: direccion,
+          NumContacto: numContacto
+        };
+
+        // Realizar la petición POST
+        fetch("/aseguradoras/RegistrarAseguradora", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(aseguradoraData)
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log("Respuesta del servidor:", data);
+            // Aquí puedes manejar la respuesta del servidor según tus necesidades
+          })
+          .catch(error => console.error("Error al realizar la petición:", error));
+      }
+
+      function regresarTablaAseguradoras() {
+        window.location.href = "/Aseguradoras"; // Cambia la ruta según tus necesidades
+      }
+    </script>
+  </body>
+</html>
