@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <link rel="icon" type="image/png" href="../img/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <title>Register | KOKUA admin</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+        <a class="navbar-brand" href="../index.html">
+            <img class="img-fluid" src="../img/KokuaLogo.png" class="mx-auto d-block" height="150" width="150" />
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 20px;">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 20px;">Patient Care</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="margin-right: 20px;">Online Chat</a>
+                </li>
+            </ul>
+        </div>
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+    <div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="rounded-container">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <nav class="navbar navbar-light bg-light">
+                    <!-- your existing navigation content -->
+                </nav>
+                <h2>Form Section</h2>
+                <form action="/action_page.php">
+                    <!-- Your form fields go here -->
+                    <!-- Display the selected date here -->
+                    <div class="form-group">
+                        <label for="selectedDate">Selected Date:</label>
+                        <input type="text" class="form-control" id="selectedDate" readonly>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                defaultView: 'month',
+                header: {
+                    left: 'prev',
+                    center: 'title',
+                    right: 'next'
+                },
+                fixedWeekCount: false,
+                editable: false,
+                selectable: true, // Enable the user to select dates
+                select: function (start, end, jsEvent, view) {
+                    // Display the selected date in the input field
+                    $('#selectedDate').val(start.format());
+                },
+                events: [] // You can add events here if needed
+            });
+        });
+    </script>
+
+    <!-- ... your existing scripts ... -->
+
+</body>
+
+</html>

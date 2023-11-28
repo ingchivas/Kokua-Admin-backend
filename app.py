@@ -10,6 +10,7 @@ from backend.Facturas import *
 from backend.Ordenes import *
 from backend.Usuarios import *
 from backend.Citas import *
+from backend.Pacientes import *
 
 
 app = FastAPI()
@@ -25,7 +26,7 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"message": "Bienvenido a la API de Kokua"}
+    return FileResponse("frontend/index.html")
 
 #______________________________________________________Aseguradoras_________________________________________________________________
 
@@ -411,6 +412,87 @@ async def putCita(cita: dict):
 async def deleteCita(id: int):
     return EliminarCita(id)
 
+# ____________________________________________________________Pacientes________________________________________________________________________
+
+@app.get("/pacientes/Todos")
+async def getPacientes():
+    return ConsultarPacientes()
+
+@app.get("/pacientes/Paciente/{id}")
+async def getPaciente(id: int):
+    return ConsultarPacientePorID(id)
+
+@app.post("/pacientes/AgregarPaciente")
+async def postPaciente(paciente: dict):
+    try:
+        Nombre = paciente["Nombre"]
+        Apellido = paciente["Apellido"]
+        Padecimento = paciente["Padecimento"]
+        EstatusPaciente = paciente["EstatusPaciente"]
+        SaldoActual = paciente["SaldoActual"]
+        Username = paciente["Username"]
+        Password = paciente["Password"]
+        TipoAcceso = paciente["TipoAcceso"]
+        
+        return AgregarPaciente({
+            "Nombre": Nombre,
+            "Apellido": Apellido,
+            "Padecimento": Padecimento,
+            "EstatusPaciente": EstatusPaciente,
+            "SaldoActual": SaldoActual,
+            "Username": Username,
+            "Password": Password
+        })
+    except:
+        return {"status": 400, "message": "Error al agregar el paciente"}
+    
+@app.post("/pacientes/AgregarPacienteSinUsuario")
+async def postPaciente(paciente: dict):
+    try:
+        Nombre = paciente["Nombre"]
+        Apellido = paciente["Apellido"]
+        Padecimento = paciente["Padecimento"]
+        EstatusPaciente = paciente["EstatusPaciente"]
+        SaldoActual = paciente["SaldoActual"]
+        
+        return AgregarPacienteSinUsuario({
+            "Nombre": Nombre,
+            "Apellido": Apellido,
+            "Padecimento": Padecimento,
+            "EstatusPaciente": EstatusPaciente,
+            "SaldoActual": SaldoActual
+        })
+    except:
+        return {"status": 400, "message": "Error al agregar el paciente"}
+
+@app.post("/pacientes/ActualizarPaciente/{id}")
+async def putPaciente(id: int, paciente: dict):
+    try:
+        Nombre = paciente["Nombre"]
+        Apellido = paciente["Apellido"]
+        Padecimento = paciente["Padecimento"]
+        EstatusPaciente = paciente["EstatusPaciente"]
+        SaldoActual = paciente["SaldoActual"]
+        Username = paciente["Username"]
+        Password = paciente["Password"]
+        TipoAcceso = paciente["TipoAcceso"]
+        
+        return ActualizarPaciente(id, {
+            "Nombre": Nombre,
+            "Apellido": Apellido,
+            "Padecimento": Padecimento,
+            "EstatusPaciente": EstatusPaciente,
+            "SaldoActual": SaldoActual,
+            "Username": Username,
+            "Password": Password,
+            "TipoAcceso": TipoAcceso
+        })
+    except:
+        return {"status": 400, "message": "Error al actualizar el paciente"}
+
+@app.delete("/pacientes/EliminarPaciente/{id}")
+async def deletePaciente(id: int):
+    return EliminarPaciente(id)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8081)

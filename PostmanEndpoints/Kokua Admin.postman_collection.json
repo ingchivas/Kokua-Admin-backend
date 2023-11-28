@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "959d6e13-db78-489b-afe1-cdfada4f5ffb",
+		"_postman_id": "d97c7c3b-1c2e-4f26-9d0d-724202f56d87",
 		"name": "Kokua Admin",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "22122408"
@@ -23,7 +23,8 @@
 								"aseguradoras",
 								"Todas"
 							]
-						}
+						},
+						"description": "\nThis API endpoint allows you to retrieve information about all insurance companies.\n\n## Request\n\n### Endpoint\n\n`GET /aseguradoras/Todas`\n\n### Response\n\n- `status` (integer): The status code of the response.\n- `result` (array): An array of insurance company objects.\n\nEach insurance company object has the following properties:\n- `IDAseguradora` (integer): The unique identifier of the insurance company.\n- `NombreAseguradora` (string): The name of the insurance company.\n- `Direccion` (string): The address of the insurance company.\n- `NumContacto` (string): The contact number of the insurance company.\n\nExample Response:\n```\n{\n    \"status\": 0,\n    \"result\": [\n        {\n            \"IDAseguradora\": 0,\n            \"NombreAseguradora\": \"\",\n            \"Direccion\": \"\",\n            \"NumContacto\": \"\"\n        }\n    ]\n}\n```\n"
 					},
 					"response": []
 				},
@@ -53,7 +54,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"NombreAseguradora\": \"Nueva Aseguradora \",\r\n    \"Direccion\": \"Calle Los Portales #05\",\r\n    \"NumContacto\": \"55097943\"\r\n}",
+							"raw": "{\r\n    \"NombreAseguradora\": \"Nueva Aseguradora ejemplo \",\r\n    \"Direccion\": \"Calle Los Portales #05\",\r\n    \"NumContacto\": \"55097943\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1032,7 +1033,8 @@
 								"citas",
 								"Todas"
 							]
-						}
+						},
+						"description": "This API endpoint allows you to retrieve all the appointments available. It is an HTTP GET request to `{{host}}/citas/Todas`.\n\nThe response for the last execution of this request had a status code of 200, indicating a successful response. The response body included the following information:\n\n``` json\n{\n    \"status\": 0,\n    \"result\": [\n        {\n            \"id_cita\": 0,\n            \"id_paciente\": 0,\n            \"id_doctor\": 0,\n            \"tipo_cita\": \"\",\n            \"estatus_cita\": \"\",\n            \"fecha\": \"\"\n        }\n    ]\n}\n\n ```\n\nPlease note that the values in the response are placeholders and may not reflect the actual data.\n\nTo use this endpoint, you can send an HTTP GET request to the specified URL. The response will include a list of appointments, with each appointment represented by an object containing the following properties:\n\n- `id_cita`: The unique identifier for the appointment.\n- `id_paciente`: The unique identifier for the patient associated with the appointment.\n- `id_doctor`: The unique identifier for the doctor associated with the appointment.\n- `tipo_cita`: The type of the appointment.\n- `estatus_cita`: The status of the appointment.\n- `fecha`: The date of the appointment.\n    \n\nPlease refer to the API documentation for more details on how to use this endpoint and the possible values for the properties."
 					},
 					"response": []
 				},
@@ -1188,6 +1190,149 @@
 								"citas",
 								"EliminarCita",
 								"05"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pacientes",
+			"item": [
+				{
+					"name": "Todos Los Pacientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/pacientes/Todos",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes",
+								"Todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Paciente Por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/pacientes/Paciente/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes",
+								"Paciente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Paciente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Nombre\": \"Ernesto\",\r\n    \"Apellido\": \"Gonzales Reyes\",\r\n    \"Padecimento\": \"Cancer de páncreas\",\r\n    \"EstatusPaciente\": \"2\",\r\n    \"SaldoActual\": \"12346\",\r\n    \"Username\": \"EGonzales\",\r\n    \"Password\": \"PasswordChingon@2324\",\r\n    \"TipoAcceso\": \"Paciente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/pacientes/AgregarPaciente",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes",
+								"AgregarPaciente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Paciente Sin usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Nombre\": \"Emmanuel\",\r\n    \"Apellido\": \"Reyes\",\r\n    \"Padecimento\": \"Cancer de páncreas\",\r\n    \"EstatusPaciente\": \"2\",\r\n    \"SaldoActual\": \"12346\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/pacientes/AgregarPacienteSinUsuario",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes",
+								"AgregarPacienteSinUsuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar paciente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Nombre\": \"Ernesto\",\r\n    \"Apellido\": \"Gonzales Reyes\",\r\n    \"Padecimento\": \"Cancer de páncreas\",\r\n    \"EstatusPaciente\": \"2\",\r\n    \"SaldoActual\": \"12346\",\r\n    \"Username\": \"EGonzales\",\r\n    \"Password\": \"PasswordChingon@2324\",\r\n    \"TipoAcceso\": \"Paciente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/pacientes/ActualizarPaciente/01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes",
+								"ActualizarPaciente",
+								"01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar paciente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/pacientes/EliminarPaciente/103",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"pacientes",
+								"EliminarPaciente",
+								"103"
 							]
 						}
 					},

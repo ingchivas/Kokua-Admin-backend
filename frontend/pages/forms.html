@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="icon" type="image/png" href="../img/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <title>Register | KOKUA admin</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+      <a class="navbar-brand" href="../index.html"
+        ><img
+          class="img-fluid"
+          src="../img/KokuaLogo.png"
+          class="mx-auto d-block"
+          height="150"
+          width="150"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ml-auto"> <!-- Added ml-auto to push the items to the right -->
+        <li class="nav-item">
+            <a class="nav-link" style="margin-right: 20px;">About Us</a> <!-- Added margin-right -->
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="margin-right: 20px;">Patient Care</a> <!-- Added margin-right -->
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="margin-right: 20px;">Online Chat</a> <!-- Added margin-right -->
+        </li>
+        </ul>
+      </div>
+      <form class="form-inline">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
+    </nav>
+    <div class="container">
+      <br />
+      <h2>Personal Information</h2>
+      <br />
+      <form action="/action_page.php">
+        <div class="form-group">
+          <label for="name">Full Name:</label>
+          <input type="text" class="form-control" id="name" name="name" />
+        </div>
+        <div class="form-group">
+          <label for="brthdt">Birth Date:</label>
+          <input type="text" class="form-control" id="brthdt" name="brthdt" />
+        </div>
+        <div class="form-group">
+          <label for="brthplc">Birth Place:</label>
+          <input type="text" class="form-control" id="brthplc" name="brthplc" />
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <input type="text" class="form-control" id="gender" name="gender" />
+        </div>
+        <div class="form-group">
+          <label for="citizen">Citizenship:</label>
+          <input type="text" class="form-control" id="citizen" name="citizen" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" class="form-control" id="email" name="email" />
+        </div>
+        <div class="form-group">
+          <label for="address">Address:</label>
+          <input type="text" class="form-control" id="address" name="address" />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number:</label>
+          <input type="text" class="form-control" id="phone" name="phone" />
+        </div>
+        <div class="form-group">
+          <label for="docs">Upload your documents:</label>
+          <input type="file" class="form-control" id="customFile" />
+        </div>
+        <div class="form-group">
+          <label for="civil">Civil Status:</label>
+          <input type="text" class="form-control" id="civil" name="civil" />
+        </div>
+        <h3>Do you have insurance?:</h3>
+        <div class="btn-group">
+          <button type="button" class="btn btn-primary">Yes</button>
+          <button type="button" class="btn btn-primary">No</button>
+        </div>
+        <br />
+        <br />
+        <label for="docs">Upload your policy:</label>
+        <input type="file" class="form-control" id="customFile" />
+        <p>
+          <br />
+          <b>NOTICE:</b> If you do not have insurance, you should be aware that
+          the payment for your treatment will be on your own.
+        </p>
+        <br />
+        <div class="form-group form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember" />
+            By selecting this option you agree with our privacy policy
+          </label>
+        </div>
+        <div class="form-group form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" name="remember" />
+            You will receive a confirmation email with your new account when you
+            have accepted our policy
+          </label>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">
+          Complete Registration
+        </button>
+      </form>
+      <br />
+    </div>
+  </body>
+</html>
