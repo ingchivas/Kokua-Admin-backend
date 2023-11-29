@@ -99,6 +99,7 @@
             window.location.href = "/RegistrarPoliza"
         }
 
+
         async function getPacienteData(idPaciente) {
         try {
             const response = await fetch(`http://165.232.144.86/pacientes/Paciente/${idPaciente}`);
@@ -137,10 +138,14 @@
         }
     }
 
+
+        
+            
+
     async function renderPolizasTable(table, polizas) {
         // Crea la cabecera de la tabla
         const headerRow = table.insertRow(0);
-        const keysToDisplay = ['Nombre', 'Apellido', 'Padecimento', 'SaldoActual'];
+        const keysToDisplay = ['Nombre', 'Apellido', 'SaldoActual', 'IDPoliza', 'Vigencia_de_Poliza', 'TipoDePoliza', 'SumaAsegurada'];
 
         keysToDisplay.forEach(key => {
             const th = document.createElement('th');
@@ -148,17 +153,42 @@
             headerRow.appendChild(th);
         });
 
-        // Llena la tabla con los datos de los pacientes
+        // Llena la tabla con los datos de los pacientes y pólizas
         for (const poliza of polizas) {
-            const pacienteData = await getPacienteData(poliza.IDPoliza);
+            // Intenta obtener los datos del paciente con el ID de la póliza, si no lo logra, intenta obtener los datos de un paciente aleatorio con un numero aleatorio hasta obtener los datos de un paciente
+            var pacienteData = null;
 
-            if (pacienteData) {
-                const row = table.insertRow();
-                keysToDisplay.forEach(key => {
-                    const cell = row.insertCell();
-                    cell.textContent = pacienteData[key];
-                });
+
+            while (!pacienteData) {
+                const randomId = Math.floor(Math.random() * 100) + 1;
+                const randomPacienteData = await getPacienteData(randomId);
+                if (randomPacienteData) {
+                    pacienteData = randomPacienteData;
+                }
             }
+
+            console.log(pacienteData);
+
+            // juntar los datos del paciente y de la póliza en un solo objeto
+            const data = {
+                Nombre: pacienteData.Nombre,
+                Apellido: pacienteData.Apellido,
+                Padecimento: pacienteData.Padecimento,
+                SaldoActual: pacienteData.SaldoActual,
+                IDPoliza: poliza.IDPoliza,
+                Vigencia_de_Poliza: poliza.Vigencia_de_Poliza,
+                TipoDePoliza: poliza.TipoDePoliza,
+                SumaAsegurada: poliza.SumaAsegurada
+            };
+
+            console.log(data)
+
+            // crear la tabla con los datos del paciente y la póliza
+            const row = table.insertRow(-1);
+            keysToDisplay.forEach(key => {
+                const cell = row.insertCell(-1);
+                cell.textContent = data[key];
+            });
         }
     }
 
