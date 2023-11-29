@@ -98,52 +98,53 @@
             window.location.href = "/RegistrarPoliza"
         }
 
-        function GetPolizasPorAseguradora() {
-            // Obtén el ID de la aseguradora desde la URL
+        function getPacienteData(idPaciente) {
+        return fetch(`http://165.232.144.86/pacientes/Paciente/${idPaciente}`)
+            .then(response => response.json())
+            .then(data => data.result)
+            .catch(error => console.error('Error fetching paciente:', error));
+    }
 
-            var urlCompleta = window.location.href;
-            console.log("URL completa: " + urlCompleta);
-            const idAseguradora = window.location.pathname.split('/').pop();
-            console.log(idAseguradora)
+    async function GetPolizasPorAseguradora() {
+        const table = document.getElementById('polizasTable');
 
-            // Hacer la solicitud GET al endpoint `/polizas/PolizasPorAseguradora/{id}`
-            fetch(`http://165.232.144.86/polizas/PolizasPorAseguradora/${idAseguradora}`)
-                .then(response => response.json())
-                .then(data => renderPolizasTable(data.result))
-                .catch(error => console.error('Error fetching pólizas:', error));
+        // Obtén el ID de la aseguradora desde la URL
+        const idAseguradora = window.location.pathname.split('/').pop();
+
+        // Hacer la solicitud GET al endpoint `/polizas/PolizasPorAseguradora/{id}`
+        const response = await fetch(`http://165.232.144.86/polizas/PolizasPorAseguradora/${idAseguradora}`);
+        const data = await response.json();
+
+        if (data.status === 200) {
+            // Renderiza la tabla con los datos de los pacientes
+            renderPolizasTable(table, data.result);
+        } else {
+            console.error('Error fetching pólizas:', data.result);
         }
+    }
 
-        function renderPolizasTable(polizas) {
-            const table = document.getElementById('polizasTable');
+    async function renderPolizasTable(table, polizas) {
+        // Crea la cabecera de la tabla
+        const headerRow = table.insertRow(0);
+        const keysToDisplay = ['Nombre', 'Apellido', 'Padecimento', 'SaldoActual'];
 
-            // Crea la cabecera de la tabla
-            const headerRow = table.insertRow(0);
-            for (const key in polizas[0]) {
-                const th = document.createElement('th');
-                th.textContent = key;
-                headerRow.appendChild(th);
-            }
+        keysToDisplay.forEach(key => {
+            const th = document.createElement('th');
+            th.textContent = key;
+            headerRow.appendChild(th);
+        });
 
-            // Llena la tabla con los datos de las pólizas
-            polizas.forEach(poliza => {
-                const row = table.insertRow();
-                for (const key in poliza) {
-                    const cell = row.insertCell();
-                    cell.textContent = poliza[key];
-                }
+        // Llena la tabla con los datos de los pacientes
+        for (const poliza of polizas) {
+            const pacienteData = await getPacienteData(poliza.IDPaciente);
+
+            const row = table.insertRow();
+            keysToDisplay.forEach(key => {
+                const cell = row.insertCell();
+                cell.textContent = pacienteData[key];
             });
         }
-
-        document.addEventListener("DOMContentLoaded", GetPolizasPorAseguradora);
-
-        const homeButton = document.querySelector("#homeButton");
-        homeButton.addEventListener("click", redirectToHome);
-
-        const aseguradorasButton = document.querySelector("#Aseguradoras");
-        aseguradorasButton.addEventListener("click", redirectToAseguradoras);
-
-        const registrarPolizaButton = document.querySelector("#registrarPolizaButton");
-        registrarPolizaButton.addEventListener("click", redirectRegistrarPoliza);
+    }
     </script>
 </body>
 
