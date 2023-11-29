@@ -88,7 +88,7 @@
   <script>
     function redirectToRegistro() {
       // Realizar la petición al servidor
-      fetch('http://165.232.144.86/Registro')
+      fetch('https://admin.kokuahealth.tech/Registro')
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -98,7 +98,7 @@
         
         // Redireccionar a la página de registro
         .then(data => {
-          window.location.href = 'http://165.232.144.86/Registro';
+          window.location.href = 'https://admin.kokuahealth.tech/Registro';
         })
         .catch(error => {
           console.error('There has been a problem with your fetch operation:', error);
