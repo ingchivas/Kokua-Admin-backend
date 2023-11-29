@@ -86,6 +86,7 @@
         </div>
     </div>
     <script>
+        const idAseguradora = window.location.pathname.split('/').pop();
         function redirectToHome() {
             window.location.href = "/Home";
         }
@@ -109,7 +110,7 @@
         const table = document.getElementById('polizasTable');
 
         // Obtén el ID de la aseguradora desde la URL
-        const idAseguradora = window.location.pathname.split('/').pop();
+        
 
         // Hacer la solicitud GET al endpoint `/polizas/PolizasPorAseguradora/{id}`
         const response = await fetch(`http://165.232.144.86/polizas/PolizasPorAseguradora/${idAseguradora}`);
@@ -136,7 +137,7 @@
 
         // Llena la tabla con los datos de los pacientes
         for (const poliza of polizas) {
-            const pacienteData = await getPacienteData(poliza.IDPaciente);
+            const pacienteData = await getPacienteData(idAseguradora);
 
             const row = table.insertRow();
             keysToDisplay.forEach(key => {
