@@ -107,7 +107,7 @@
             console.log(idAseguradora)
 
             // Hacer la solicitud GET al endpoint `/polizas/PolizasPorAseguradora/{id}`
-            fetch(`https://kokuaadminbackend.eviniegra.software/polizas/PolizasPorAseguradora/${idAseguradora}`)
+            fetch(`http://165.232.144.86/polizas/PolizasPorAseguradora/${idAseguradora}`)
                 .then(response => response.json())
                 .then(data => renderPolizasTable(data.result))
                 .catch(error => console.error('Error fetching pólizas:', error));

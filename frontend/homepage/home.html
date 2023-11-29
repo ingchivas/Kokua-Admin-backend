@@ -90,7 +90,7 @@
       window.location.href = "/Aseguradoras";
     }
 
-    fetch("https://kokuaadminbackend.eviniegra.software/polizas/Todas")
+    fetch("http://165.232.144.86/polizas/Todas")
       .then(response => response.json())
       .then(data => {
         // Obtener el número de pólizas
@@ -103,7 +103,7 @@
       .catch(error => console.error("Error al obtener datos de pólizas:", error));
 
     // Hacer la solicitud AJAX para obtener datos de pacientes
-    fetch("https://kokuaadminbackend.eviniegra.software/pacientes/Todos")
+    fetch("http://165.232.144.86/pacientes/Todos")
       .then(response => response.json())
       .then(data => {
         // Obtener el número de pacientes
@@ -116,7 +116,7 @@
       .catch(error => console.error("Error al obtener datos de pacientes:", error));
 
     // Hacer la solicitud AJAX para obtener datos de aseguradoras
-    fetch("https://kokuaadminbackend.eviniegra.software/aseguradoras/Todas")
+    fetch("http://165.232.144.86/aseguradoras/Todas")
       .then(response => response.json())
       .then(data => {
         // Obtener el número de aseguradoras

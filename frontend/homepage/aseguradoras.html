@@ -109,7 +109,7 @@
 
         function GetAseguradoras() {
             // Hacer la solicitud GET al endpoint "/aseguradoras/Todas"
-            fetch("https://kokuaadminbackend.eviniegra.software/aseguradoras/Todas")
+            fetch("http://165.232.144.86/aseguradoras/Todas")
                 .then(response => response.json())
                 .then(data => renderAseguradorasTable(data.result))
                 .catch(error => console.error('Error fetching aseguradoras:', error));
